@@ -1,6 +1,6 @@
 .navbarList {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   font-family: 'Playfair Display', serif;
   justify-content: center;
 }
