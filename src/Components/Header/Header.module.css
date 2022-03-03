@@ -1,0 +1,98 @@
+.headerTopbar{
+  height: 45px;
+}
+
+.headerTopbarContent{
+  text-align: center;
+  display: block;
+  font-size: 11px;
+  color: var(--primary-color);
+  font-weight: 400;
+  line-height: 45px;
+  background-color: #f5f4f2;
+}
+
+.headerMain{
+  height: 132px;
+  background-color: #fff;
+  border-bottom: 1px solid var(--line-color);
+  text-align: center;
+  align-items: center;
+}
+.headerLogo{
+  font-size: 45px;
+  font-weight: 500;
+}
+.headerAction{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+}
+
+.headerActionSearch{
+  display: block;
+  margin-right: 10px;
+  height: 40px;
+}
+
+.headerActionCart{
+  display: block;
+  height: 40px;
+}
+
+.cartAction{
+  position: relative;
+  cursor: pointer;
+}
+
+.cartAction:hover .cartCount{
+  transform: translateY(150%);
+}
+.cartAction:hover .cartCountWrap::after{
+  transform: translateY(0);
+}
+.cartAction > i {
+  display: block;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+.cartCountWrap {
+  overflow: hidden;
+  position: absolute;
+  height: 50%;
+  width: 60%;
+  top: 9px;
+  /* background-color: red; */
+  left: 6px;
+}
+
+.cartCountWrap::after {
+  content: attr(data-count);
+  position: absolute;
+  top: 3px; 
+  left: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  transform: translateY(-150%);
+  color: var(--primary-color);
+  transition: transform 0.3s ease 0.1s;
+
+}
+
+.cartCount{
+  position: absolute;
+  top: 3px; 
+  left: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+  color: var(--primary-color);
+}
+
+.cartDropdown{
+  display: none;
+}

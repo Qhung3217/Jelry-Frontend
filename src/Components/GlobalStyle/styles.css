@@ -1,0 +1,16 @@
+html{
+  --primary-color: #544128;
+  --secondary-color: #e7ebec;
+  --hover-color: #beaa88;
+  --line-color: #edecea;
+
+  color: var(--primary-color)
+}
+
+a{
+  transition: opacity 150ms linear, color 150ms linear, background 150ms linear;
+  text-decoration: none;
+  color: inherit;
+}
+
+
