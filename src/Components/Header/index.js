@@ -94,8 +94,17 @@ function Header() {
                           </div>
                           
                         </div>
-
-
+                      </div>
+                      <div className={clsx(styles.seperate)}></div>
+                      <div className={clsx(styles.cartBottom)}>
+                        <div className={clsx(styles.cartTotal)}>
+                          <span className={clsx(styles.cartTotalTitle)}>Tổng tiền:</span>
+                          <span className={clsx(styles.cartTotalPrice)}>1,900,000đ</span>
+                        </div>
+                        <div className={clsx(styles.cartGroupBtn)}>
+                          <button className={clsx("btn dark large")}>Xem giỏ hàng</button>
+                          <button className={clsx("btn dark large")}>Thanh toán</button>
+                        </div>
                       </div>
                     </div>
                   </div>

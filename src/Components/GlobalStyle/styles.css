@@ -13,4 +13,34 @@ a{
   color: inherit;
 }
 
+.btn{
+  display: inline-block;
+  padding: 10px 28px;
+  line-height: normal;
+  border: 1px solid #ffffff;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 1px;
+  background-color: transparent;
+  transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86),border 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  z-index: 1;
+  cursor: pointer;
+}
+.btn + .btn{
+  margin-left: 15px;
+}
+.btn.dark{
+  color: #fff;
+  border-color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+.btn.large{
+  width: 100%;
+}
 
+.btn:hover{
+  color: var(--primary-color);
+  background-color: #fff;
+}

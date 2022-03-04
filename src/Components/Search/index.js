@@ -7,7 +7,7 @@ function Search(){
   return (
     <div className={clsx(styles.searchBox)}>
       <label className={clsx(styles.searchAction)} htmlFor="searchCheckbox">
-        <i class='bx bx-search' ></i>
+        <i className='bx bx-search' ></i>
       </label>
       <input type="checkbox" id="searchCheckbox" className={clsx(styles.searchCheckbox)}/>
       <div className={clsx(styles.searchDropdown)}>
@@ -17,7 +17,7 @@ function Search(){
         <div className={clsx(styles.searchInput)}>
           <input type="text" className={clsx(styles.searchInputKey)} placeholder="Tìm kiếm sản phẩm..."/>
           <button className={clsx(styles.searchBtn)}>
-            <i class='bx bx-search' ></i>
+            <i className='bx bx-search' ></i>
           </button>
           <div className={clsx(styles.searchSuggestWrap)}>
             <div className={clsx(styles.searchSuggest)}>
