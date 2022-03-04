@@ -1,0 +1,57 @@
+.pageWrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.headingPage {
+  font-family: 'Playfair Display', sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.wrapboxContentPage {
+  margin-bottom: 30px;
+}
+
+.contentPage {
+  width: 800px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+.contentPage a:hover{
+  color: var(--hover-color);
+}
+.contentPage h2{
+  margin-bottom: 15px;
+}
+.contentPage p{
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  color: var(--primary-color);
+}
+.contentPage p span{
+  line-height: 21px;
+}
+.contentPage strong {
+  font-weight: 600;
+}
+
+.contentPage ul{
+  list-style-type: disc;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 43px;
+}
+
+.contentPage li{
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  color: var(--primary-color);
+}
