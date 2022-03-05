@@ -1,0 +1,19 @@
+.banner{
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.bannerBtn {
+  color: var(--hover-color);
+  background-color:#fff;
+  width: calc(100% - 30px);
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bannerBtn:hover{
+  background-color: transparent;
+  color: #fff;
+}
