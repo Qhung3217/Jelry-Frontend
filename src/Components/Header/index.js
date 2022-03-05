@@ -18,7 +18,7 @@ function Header() {
         <div className="col l-12">
           <div className={clsx(styles.headerMain, 'row no-gutters')}>
               <div className="col l-3">
-                <div className={clsx(styles.headerLogo)}>Jelry</div>
+                <div className={clsx(styles.headerLogo)}><Link to="/">Jelry</Link></div>
               </div>
               <div className="col l-6">
                 <Navbar/>

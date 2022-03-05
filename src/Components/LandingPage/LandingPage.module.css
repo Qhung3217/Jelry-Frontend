@@ -4,8 +4,8 @@
 }
 
 .bannerBtn {
-  color: var(--hover-color);
-  background-color:#fff;
+  color: var(--primary-color);
+  background-color:#fff !important;
   width: calc(100% - 30px);
   position: absolute;
   bottom: 15px;
@@ -14,6 +14,6 @@
 }
 
 .bannerBtn:hover{
-  background-color: transparent;
-  color: #fff;
+  background-color: transparent !important;
+  color: #fff !important;
 }

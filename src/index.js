@@ -5,13 +5,15 @@ import './index.css'
 import App from './App'
 import GlobalStyle from './Components/GlobalStyle'
 import reportWebVitals from './reportWebVitals'
-
+import { Provider } from './Components/GlobalVariable'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <GlobalStyle>
-        <App />
-      </GlobalStyle>
+      <Provider>
+        <GlobalStyle>
+          <App />
+        </GlobalStyle>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

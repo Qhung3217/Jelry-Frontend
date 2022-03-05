@@ -1,12 +1,14 @@
 import clsx from 'clsx'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Navbar.module.css'
 import SubNavbar from './SubNavbar'
-
+import { GlobalVariable } from '../GlobalVariable'
+// truyen slug and id qua contextData
 function Navbar() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [items, setItems] = useState([])
+  const {setNavbarItems} = useContext(GlobalVariable);
   const url = 'http://jelry.test/api/material'
 
   useEffect(() => {
@@ -20,6 +22,7 @@ function Navbar() {
       .then(data => {
         setIsLoaded(true)
         setItems(data.data)
+        setNavbarItems(data.data)
       })
   }, [isLoaded])
   // console.log(items);
