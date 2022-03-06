@@ -8,11 +8,10 @@ import { GlobalVariable } from '../GlobalVariable'
 function Navbar() {
   const [isLoaded, setIsLoaded] = useState(false)
   const [items, setItems] = useState([])
-  const {setNavbarItems} = useContext(GlobalVariable);
-  const url = 'http://jelry.test/api/material'
-
+  const {setNavbarItems, url} = useContext(GlobalVariable);
+  let urlReq = url + '/material'
   useEffect(() => {
-    fetch(url,{
+    fetch(urlReq,{
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -35,11 +34,11 @@ function Navbar() {
       <ul className={clsx(styles.navbarList)}>
         {items.map(item => (
           <li key={item['material_id']} className={clsx(styles.navbarItem)}>
-            <Link to={'/material/'+item['material_slug']}>
+            <Link to={'/collections/'+item['material_slug']}>
               {item['material_name']}
               {item.category.length > 0 && <i className='bx bx-chevron-down'></i>}
             </Link>
-          {item.category.length > 0 && <SubNavbar cates={item.category} prefix={'/material/'+item['material_slug']}/>}
+          {item.category.length > 0 && <SubNavbar cates={item.category} prefix={'/collections'}/>}
           </li>
         ))}
         {/* <li className={clsx(styles.navbarItem)}>

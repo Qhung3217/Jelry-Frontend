@@ -3,27 +3,26 @@ import GlobalVariable from "./Context.js"
 
 function Provider({children}){
   const [navbarItems, setNavbarItems] = useState([])
-
+  let url = 'http://jelry.test/api'
   function arrayNavbar(){
-    let result = {}
+    let material = {}
+    let category = {}
     navbarItems.forEach(navbarItem => {
       let slug = navbarItem['material_slug']
       let id = navbarItem['material_id']
-      // result.push ({
-      //   [slug]: id,
-      // })
-      result = {
-        ...result,
+      material = {
+        ...material,
         [slug]: id,
       }
       if (navbarItem.category.length > 0) {
-        navbarItem.category.map(cate=> result={...result,[cate['category_slug']]:cate['category_id'],})
+        navbarItem.category.map(cate=> category={...category,[cate['category_slug']]:cate['category_id'],})
       }
     })
-    return result
+    return [material, category]
   }
 
   const contextData = {
+    url,
     navbarItems,
     setNavbarItems,
     arrayNavbar

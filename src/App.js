@@ -14,8 +14,7 @@ function App() {
         <ScrollToTop>
           <Routes>
             <Route path="/" element={<LandingPage/>}></Route>
-            <Route path="/material/:slug" element={<Product/>}></Route>
-            <Route path="/material/:slug/:slug" element={<Product/>}></Route>
+            <Route path="/collections/:slug" element={<Product/>}></Route>
             <Route path="/pages/gioi-thieu" element={<Introduce/>}></Route>
             <Route path="/pages/chinh-sach-bao-mat-thong-tin" element={<InforPrivatePolicy/>}></Route>
             <Route path="/pages/chinh-sach-bao-hanh" element={<WarrantyPolicy/>}></Route>
