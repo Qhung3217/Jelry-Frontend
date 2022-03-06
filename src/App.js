@@ -6,6 +6,7 @@ import Footer from './Components/Footer'
 import { Introduce, InforPrivatePolicy, WarrantyPolicy, DeliveryAndCheckout } from './pages'
 import LandingPage from './Components/LandingPage'
 import Product from './Components/Product'
+import ProductDetail from './Components/ProductDetail'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage/>}></Route>
             <Route path="/collections/:slug" element={<Product/>}></Route>
+            <Route path="/products/:slug" element={<ProductDetail/>}></Route>
             <Route path="/pages/gioi-thieu" element={<Introduce/>}></Route>
             <Route path="/pages/chinh-sach-bao-mat-thong-tin" element={<InforPrivatePolicy/>}></Route>
             <Route path="/pages/chinh-sach-bao-hanh" element={<WarrantyPolicy/>}></Route>
