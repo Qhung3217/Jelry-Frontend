@@ -1,0 +1,90 @@
+.productDetailThumbGroup {
+  height: auto;
+}
+
+.productDetailThumbActive{
+  border: 10px solid var(--hover-color);
+}
+.productDetailMainThumb{
+  width: 610px;
+}
+.productDetailMainThumb img{
+  width: 100%;
+  display: block;
+}
+
+.productDetailSubThumb{
+  margin-top: 15px;
+}
+.productDetailSubThumbItem {
+  width: 150px;
+}
+.productDetailSubThumbItem img{
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}
+.productDetailMain {
+  margin-top: 100px;
+}
+.productDetailName {
+  font-size: 26px;
+  font-weight: 500;
+  font-family: 'Playfair Display', sans-serif;
+  margin-bottom: 15px;
+}
+.productDetailPrice {
+  font-size: 16px;
+  font-weight: 600;
+  color:chocolate;
+}
+.productDetailSizeGroup {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.productDetailSize {
+  border: 1px solid var(--primary-color) !important;
+  color: var(--primary-color);
+  font-size: 12px!important;
+  font-weight: 500;
+}
+.productDetailAction {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.productDetailQuantityGroup {
+  border: 1px solid #f5f5f5;
+  margin-right: 50px;
+}
+.productDetailQuantityBtn {
+  border: 1px solid #f5f5f5 !important;
+background-color: #f5f5f5 !important;
+  width: 40px;
+  height: 40px;
+  font-size: 18px!important;
+  font-weight: 500;
+  color: var(--primary-color);
+  padding: 0!important;
+}
+.productDetailQuantity {
+  width: 40px;
+  display:inline-block;
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.productDetailCheckout button{
+  height: 45px;
+}
+.productDetailDesc {
+  margin-top: 20px; 
+}
+.productDetailDesc p{
+  text-align: left;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 21px;
+  margin-left: 50px;
+}

@@ -8,7 +8,7 @@ import { GlobalVariable } from "../GlobalVariable"
 function Product() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [products, setProducts] = useState([]);
-  const { arrayNavbar, url } = useContext(GlobalVariable);
+  const { arrayNavbar, url, setProductList } = useContext(GlobalVariable);
   const { slug } = useParams();
 
   useEffect(() => {
@@ -34,6 +34,7 @@ function Product() {
         console.log(data.data)
         console.log(data.data[0].image[0]['image_url'])
         setProducts(data.data)
+        setProductList(data.data)
         setIsLoaded(true)
       })
       .catch((err) => {
@@ -51,7 +52,7 @@ function Product() {
           <div className="row">
             {products.length > 0 &&
               products.map((product) => (
-                <div className="col l-3">
+                <div key={product["product_id"]} className="col l-3">
                   <div className={clsx(styles.productItem)}>
                     <Link className={clsx(styles.productThumb)} to={"/products/" + product["product_slug"]}>
                       {product.image[0] &&
