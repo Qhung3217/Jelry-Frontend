@@ -6,48 +6,46 @@ import {currencyFormat} from '../../Utils/NumberFormat'
 import { GlobalVariable } from "../GlobalVariable"
 
 function Product() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [products, setProducts] = useState([]);
-  const { arrayNavbar, url, setProductList } = useContext(GlobalVariable);
-  const { slug } = useParams();
+  const [products, setProducts] = useState([])
+  const { arrayNavbar, arrayProductList, productList, isLoadedProduct } = useContext(GlobalVariable)
+  const { slug } = useParams()
+  const [material, category] = arrayNavbar()
+  const productIndex = arrayProductList()
 
   useEffect(() => {
-    const [material, category] = arrayNavbar();
-    let urlReq;
     if (material[slug]) {
-      urlReq = url + "/material/" + material[slug];
+      //?. neu ko co return undefined
+      let productShow = []
+      material[slug].cate && material[slug].cate.map(cate=>{
+        let temp = productList.filter(prod => prod['category_id'] === cate)
+        // console.log('product show in map: ',productShow)
+        if (productShow.length > 0)
+          productShow[0].push(temp)
+        else
+          productShow.push(temp)
+      })
+      // console.log(material[slug]?.cate)
+      if (productShow.length > 0){
+        productShow = productShow[0].flat()
+        setProducts(productShow)
+      }
+      console.log('material product show: ', productShow)
     }
     if (category[slug]) {
-      urlReq = url + "/category/" + category[slug];
+      let productShow = productList.filter(prod => prod['category_id'] === category[slug].id)
+      console.log('category product show: ',productShow)
+      setProducts(productShow)
     }
 
-    console.log(material, category, urlReq);
-
-    fetch(urlReq, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data)
-        console.log(data.data[0].image[0]['image_url'])
-        setProducts(data.data)
-        setProductList(data.data)
-        setIsLoaded(true)
-      })
-      .catch((err) => {
-        console.log(err)
-        setIsLoaded(false)
-      })
+    console.log(material, category, productIndex)
+    console.log(productList)
   }, [slug])
 
-  if (!isLoaded) return <h1>Loading...</h1>
+  if (!isLoadedProduct) return <h1>Loading...</h1>
   else
     return (
       <div className={clsx(styles.wrap)}>
-        <h1 className={clsx(styles.productTitle)}>Trang sức bạc</h1>
+        <h1 className={clsx(styles.productTitle)}>{(material[slug] && material[slug].name) || (category[slug] && category[slug].name)}</h1>
         <div className="grid wide">
           <div className="row">
             {products.length > 0 &&

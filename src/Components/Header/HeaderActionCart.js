@@ -1,11 +1,12 @@
 import clsx from 'clsx'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { currencyFormat } from '../../Utils/NumberFormat'
 import styles from './Header.module.css'
 
 function HeaderActionCart(){
   const [carts, setCarts] = useState([])
+  const checkbox = useRef(null)
   console.log('before: ',carts)
   useEffect(()=>{
     let cart = localStorage.getItem('cart')
@@ -26,15 +27,23 @@ function HeaderActionCart(){
     console.log('new: ',newCarts)
     setCarts(newCarts)
   }
+  const handleClickItem = () => {
+    checkbox.current.checked = false
+  }
   return(
     <div className={clsx(styles.headerActionCart)}>
       <label className={clsx(styles.cartAction)} htmlFor="cartCheckbox">
         <i className='bx bx-shopping-bag'></i>
-        <span className={clsx(styles.cartCountWrap)} data-count='2'>
+        <span className={clsx(styles.cartCountWrap)} data-count={carts.length}>
           <span className={clsx(styles.cartCount)} >{carts.length}</span>
         </span>
       </label>
-      <input type="checkbox" id="cartCheckbox" className={clsx(styles.cartCheckbox)} />
+      <input 
+        type="checkbox" 
+        id="cartCheckbox" 
+        className={clsx(styles.cartCheckbox)} 
+        ref={checkbox}
+      />
       <div className={clsx(styles.cartDropdown)}>
         <h3 className={clsx(styles.cartTitle)}>Giỏ hàng</h3>
         <div className={clsx(styles.cartContent)}>
@@ -42,13 +51,19 @@ function HeaderActionCart(){
             <div key={index} className={clsx(styles.cartItem)}>
             <div className={clsx(styles.cartWrap)}>
               <div className={clsx(styles.cartImg)}>
-                <Link to={'/products/'+cart.product['product_slug']}>
+                <Link 
+                  to={'/products/'+cart.product['product_slug']}
+                  onClick={handleClickItem}
+                >
                   <img src={cart.product.image[0]['image_url']} alt="" />
                 </Link>
               </div>
               <div className={clsx(styles.cartInfo)}>
                 <div className={clsx(styles.cartNameAndAction)}>
-                  <Link to={'/products/'+cart.product['product_slug']}>
+                  <Link 
+                    to={'/products/'+cart.product['product_slug']}
+                    onClick={handleClickItem}
+                  >
                     <span className={clsx(styles.cartName)}>{cart.product['product_name']}</span>
                   </Link>
                   <span 

@@ -6,48 +6,30 @@ import styles from './ProductDetail.module.css'
 import {currencyFormat} from '../../Utils/NumberFormat'
 
 function ProductDetail(){
-  const [isLoaded, setIsLoaded] = useState(false)
   const [product, setProduct] = useState([])
   const [quantity, setQuantity] = useState(1)
   const [quantityInStock, setQuantityInStock] = useState(0)
   const [chooseSize, setChooseSize] = useState('')
   const [chooseImg, setChooseImg] = useState(0)
-  const {arrayProductList, url} = useContext(GlobalVariable)
+  const {arrayProductList, productList, isLoadedProduct} = useContext(GlobalVariable)
   const {slug} = useParams()
+
   useEffect(() => {
     let productIndex = arrayProductList()
-    let urlReq = url +'/product/'+ productIndex[slug]
-    console.log('product list:', productIndex, slug)
-    console.log('urlReq: ', urlReq)
-    fetch(urlReq, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then(res=>res.json())
-      .then(data =>{
-        // data.size.length > 0 && setChooseSize(data.size[0]['size_id'])
-        // data.size.length > 0 && setQuantityInStock(data.size[0].pivot['product_size_quantily'])
-        if (data.size.length > 0){
-          let index = data.size.findIndex(item => item.pivot['product_size_quantily'] > 0)
-          setChooseSize(data.size[index]['size_id'])
-          setQuantityInStock(data.size[index].pivot['product_size_quantily'])
-        }
-        setProduct(data)
-        // setChooseImg(data.image[0]['image'])
-        console.log('data ',data,chooseSize)
-        setIsLoaded(true)
-
-      })
-      .catch(err =>{
-        console.log(err)
-        setIsLoaded(false)
-      })
-      console.log('product', product)
-  }, [isLoaded])
+    console.log('product index:', productIndex)
+    let temp = productList.find( prod => prod['product_id'] === productIndex[slug])
+    console.log('temp: ',temp)
+    if (temp.size.length > 0){
+      let index = temp.size.findIndex(item => item.pivot['product_size_quantily'] > 0)
+      setChooseSize(temp.size[index]['size_id'])
+      setQuantityInStock(temp.size[index].pivot['product_size_quantily'])
+    }
+    setProduct(temp)
+    
+  }, [slug])
   console.log('quantity: ',quantity)
-  if (!isLoaded || product.length === 0) {
+
+  if (!isLoadedProduct || product.length === 0) {
     return(
       <h1>Loading...</h1>
     )

@@ -6,26 +6,12 @@ import SubNavbar from './SubNavbar'
 import { GlobalVariable } from '../GlobalVariable'
 // truyen slug and id qua contextData
 function Navbar() {
-  const [isLoaded, setIsLoaded] = useState(false)
+  // const [isLoaded, setIsLoaded] = useState(false)
   const [items, setItems] = useState([])
-  const {setNavbarItems, url} = useContext(GlobalVariable);
-  let urlReq = url + '/material'
-  useEffect(() => {
-    fetch(urlReq,{
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        setIsLoaded(true)
-        setItems(data.data)
-        setNavbarItems(data.data)
-      })
-  }, [isLoaded])
-  // console.log(items);
-  if (!isLoaded) {
+  const {navbarItems, isLoadedNavBar} = useContext(GlobalVariable)
+  useEffect(()=>setItems(navbarItems),[isLoadedNavBar])
+  
+  if (!isLoadedNavBar) {
     return(
       <h1>Loading..</h1>
     )
