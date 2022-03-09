@@ -42,6 +42,13 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+button:disabled {
+  background-color: #f5f5f5!important;
+  color: #666!important;
+  cursor: default!important;
+  border: none!important;
+  opacity: 0.5;
+}
 .productDetailSize {
   border: 1px solid var(--primary-color) !important;
   color: var(--primary-color);
