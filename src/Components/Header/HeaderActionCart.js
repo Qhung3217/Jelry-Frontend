@@ -23,8 +23,9 @@ function HeaderActionCart(){
     total = carts.reduce((result, cart) => result+= cart.product['product_price']*cart.quantity, 0)
   const handleDeleteCart = (index)=>{
     let newCarts = [...carts]
-    delete newCarts[index]
+    newCarts.splice(index,1)
     console.log('new: ',newCarts)
+    localStorage.setItem('cart', JSON.stringify(newCarts))
     setCarts(newCarts)
   }
   const handleClickItem = () => {
@@ -47,44 +48,52 @@ function HeaderActionCart(){
       <div className={clsx(styles.cartDropdown)}>
         <h3 className={clsx(styles.cartTitle)}>Giỏ hàng</h3>
         <div className={clsx(styles.cartContent)}>
-          {carts.map((cart,index)=> (
-            <div key={index} className={clsx(styles.cartItem)}>
-            <div className={clsx(styles.cartWrap)}>
-              <div className={clsx(styles.cartImg)}>
-                <Link 
-                  to={'/products/'+cart.product['product_slug']}
-                  onClick={handleClickItem}
-                >
-                  <img src={cart.product.image[0]['image_url']} alt="" />
-                </Link>
+          {carts.length === 0 ? 
+            (
+              <div className={clsx(styles.cartNothing)}>
+                <i className='bx bx-cart'></i>
+                <div className={clsx(styles.cartNothingText)}>Hiện chưa có sản phẩm</div>
               </div>
-              <div className={clsx(styles.cartInfo)}>
-                <div className={clsx(styles.cartNameAndAction)}>
+            ) 
+          : 
+            carts.map((cart,index)=> (
+              <div key={index} className={clsx(styles.cartItem)}>
+              <div className={clsx(styles.cartWrap)}>
+                <div className={clsx(styles.cartImg)}>
                   <Link 
                     to={'/products/'+cart.product['product_slug']}
                     onClick={handleClickItem}
                   >
-                    <span className={clsx(styles.cartName)}>{cart.product['product_name']}</span>
+                    <img src={cart.product.image[0]['image_url']} alt="" />
                   </Link>
-                  <span 
-                    className={clsx(styles.cartActionRemove)}
-                    onClick={()=>handleDeleteCart(index)}
-                  >
-                    <i className='bx bx-x'></i>
-                  </span>
                 </div>
-                <div className={clsx(styles.cartSizeAndPrice)}>
-                  <span className={clsx(styles.cartSize)}>{cart.size}</span>
-                  <span className={clsx(styles.cartQuantityXPrice)}>
-                    <span className={clsx(styles.cartQuantity)}>{cart.quantity}</span>
-                    x
-                    <span className={clsx(styles.cartPrice)}>{currencyFormat(cart.product['product_price'])}</span>
-                  </span>
+                <div className={clsx(styles.cartInfo)}>
+                  <div className={clsx(styles.cartNameAndAction)}>
+                    <Link 
+                      to={'/products/'+cart.product['product_slug']}
+                      onClick={handleClickItem}
+                    >
+                      <span className={clsx(styles.cartName)}>{cart.product['product_name']}</span>
+                    </Link>
+                    <span 
+                      className={clsx(styles.cartActionRemove)}
+                      onClick={()=>handleDeleteCart(index)}
+                    >
+                      <i className='bx bx-x'></i>
+                    </span>
+                  </div>
+                  <div className={clsx(styles.cartSizeAndPrice)}>
+                    <span className={clsx(styles.cartSize)}>{cart.size}</span>
+                    <span className={clsx(styles.cartQuantityXPrice)}>
+                      <span className={clsx(styles.cartQuantity)}>{cart.quantity}</span>
+                      x
+                      <span className={clsx(styles.cartPrice)}>{currencyFormat(cart.product['product_price'])}</span>
+                    </span>
+                  </div>
                 </div>
               </div>
+              
             </div>
-            
-          </div>
           ))}
         </div>
         <div className={clsx(styles.seperate)}></div>
@@ -94,8 +103,8 @@ function HeaderActionCart(){
             <span className={clsx(styles.cartTotalPrice)}>{currencyFormat(total)}</span>
           </div>
           <div className={clsx(styles.cartGroupBtn)}>
-            <button className={clsx("btn dark large")}>Xem giỏ hàng</button>
-            <button className={clsx("btn dark large")}>Thanh toán</button>
+            <Link to="/cart" className={clsx("btn dark large")}>Xem giỏ hàng</Link>
+            <Link to="/" className={clsx("btn dark large")}>Thanh toán</Link>
           </div>
         </div>
       </div>

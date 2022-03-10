@@ -73,7 +73,12 @@
   text-align: center;
   border-bottom: 1px solid #ededed;
 }
-
+.searchNotice{
+  font-size: 14px;
+  font-weight: 500;
+  color: #E45826;
+  margin-bottom: 12px;
+}
 .searchInput{
   min-height: 45px;
   width: 100%;
@@ -98,7 +103,9 @@
 .searchInputKey:focus ~ .searchSuggestWrap{
   display: block;
 }
-
+.show {
+  display: block!important;
+}
 .searchBtn{
   position: absolute;
   top: 0;

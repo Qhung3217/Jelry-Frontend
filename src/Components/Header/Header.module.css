@@ -159,7 +159,6 @@ header{
   overflow-y: scroll;
   overscroll-behavior: none;
 }
-
 .cartContent::-webkit-scrollbar{
   width: 2px;
   height: 2px;
@@ -175,7 +174,18 @@ header{
 .cartContent::-webkit-scrollbar-track{
   border-radius: 0;
 }
-
+.cartNothing i{
+  color: #4a5696;
+  font-size: 60px;
+  margin-bottom: 4px;
+}
+.cartNothingText{
+  margin: 0 15px;
+  color: #4a5696;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 16px;
+}
 .cartItem{
   border-bottom: 1px dotted #e1e3e4;
   margin: 0 10px;
