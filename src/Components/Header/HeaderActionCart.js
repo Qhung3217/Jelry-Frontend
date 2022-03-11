@@ -1,12 +1,14 @@
 import clsx from 'clsx'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { currencyFormat } from '../../Utils/NumberFormat'
 import styles from './Header.module.css'
+import {GlobalVariable} from '../GlobalVariable'
 
 function HeaderActionCart(){
   const [carts, setCarts] = useState([])
-  const checkbox = useRef(null)
+  // const checkbox = useRef(null)
+  const {localStorageChange, headerCartCheckboxRef} = useContext(GlobalVariable)
   console.log('before: ',carts)
   useEffect(()=>{
     let cart = localStorage.getItem('cart')
@@ -15,7 +17,7 @@ function HeaderActionCart(){
       console.log('After: ',cart)
       setCarts(cart)
     }
-  },[])
+  },[localStorageChange])
   
   // console.log(carts)
   let total = 0
@@ -29,8 +31,12 @@ function HeaderActionCart(){
     setCarts(newCarts)
   }
   const handleClickItem = () => {
-    checkbox.current.checked = false
+    headerCartCheckboxRef.current.checked = false
   }
+  // const handleClickOutside = e => {
+  //   if (!e.target.closet('.'+styles.cartDropdown))
+  //     handleClickItem()
+  // }
   return(
     <div className={clsx(styles.headerActionCart)}>
       <label className={clsx(styles.cartAction)} htmlFor="cartCheckbox">
@@ -43,8 +49,9 @@ function HeaderActionCart(){
         type="checkbox" 
         id="cartCheckbox" 
         className={clsx(styles.cartCheckbox)} 
-        ref={checkbox}
+        ref={headerCartCheckboxRef}
       />
+      <label className={clsx(styles.modal)} htmlFor="cartCheckbox"></label>
       <div className={clsx(styles.cartDropdown)}>
         <h3 className={clsx(styles.cartTitle)}>Giỏ hàng</h3>
         <div className={clsx(styles.cartContent)}>
@@ -103,11 +110,24 @@ function HeaderActionCart(){
             <span className={clsx(styles.cartTotalPrice)}>{currencyFormat(total)}</span>
           </div>
           <div className={clsx(styles.cartGroupBtn)}>
-            <Link to="/cart" className={clsx("btn dark large")}>Xem giỏ hàng</Link>
-            <Link to="/" className={clsx("btn dark large")}>Thanh toán</Link>
+            <Link 
+              to="/cart" 
+              className={clsx("btn dark large")}
+              onClick={handleClickItem}
+            >
+              Xem giỏ hàng
+            </Link>
+            <Link 
+              to="/" 
+              className={clsx("btn dark large")}
+              onClick={handleClickItem}
+            >
+              Thanh toán
+            </Link>
           </div>
         </div>
       </div>
+      
     </div>
   )
 }

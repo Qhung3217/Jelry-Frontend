@@ -1,7 +1,17 @@
 header{
   margin-bottom: 15px;
 }
-
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  background-color: transparent;
+  display: none;
+  cursor: pointer;
+}
 .headerTopbar{
   height: 45px;
 }
@@ -106,10 +116,13 @@ header{
   opacity: 1;
   transform: scale(1);
 }
+.cartCheckbox:checked ~ .modal{
+  display: block;
+}
 .cartDropdown{
   visibility: hidden;
   position: absolute;
-  top: calc(100% + 15px);
+  top: calc(100% + 11px);
   left: auto;
   right: -65px;
   width: 450px;
@@ -158,6 +171,8 @@ header{
   max-height: 320px;
   overflow-y: scroll;
   overscroll-behavior: none;
+  transform-origin: top;
+  transition: 0.15s ease-in;
 }
 .cartContent::-webkit-scrollbar{
   width: 2px;

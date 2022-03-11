@@ -36,6 +36,7 @@ function Search(){
         className={clsx(styles.searchCheckbox)}
         ref={activeSearch}
         />
+      <label className={clsx(styles.modal)} htmlFor="searchCheckbox"></label>
       <div className={clsx(styles.searchDropdown)}>
         
         <h3 className={clsx(styles.searchTitle)}>Tìm kiếm</h3>

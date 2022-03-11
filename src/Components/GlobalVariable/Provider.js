@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import GlobalVariable from "./Context.js"
 
 function Provider({children}){
@@ -6,6 +6,9 @@ function Provider({children}){
   const [productList, setProductList] = useState([])
   const [isLoadedNavBar, setIsLoadedNavBar] = useState(false)
   const [isLoadedProduct, setIsLoadedProduct] = useState(false)
+  const [quantityList, setQuantityList] = useState([])
+  const [localStorageChange, setLocalStorageChange] = useState(false)
+  const headerCartCheckboxRef = useRef(null)
   let url = 'http://jelry.test/api'
 
   useEffect(() => {
@@ -37,9 +40,33 @@ function Provider({children}){
         setProductList(data.data)
       })
       .then(()=>setIsLoadedProduct(true))
+      doQuantityInStock()
       console.log('product: ',productList,'loaded: ', isLoadedProduct)
   }, [isLoadedProduct])
 
+  function doQuantityInStock(){
+    let quantityInStock = {}
+    productList.forEach(prod => {
+      if (prod.size.length > 0){
+        let size = {}
+        prod.size.forEach(sz =>
+          size = {
+            ...size,
+            [sz['size_name']]: sz.pivot['product_size_quantily']
+          }
+        )
+        quantityInStock = {
+          ...quantityInStock,
+          [prod['product_id']]: {
+            'id': prod['product_id'],
+            'size': size
+          }
+        }
+        setQuantityList(quantityInStock)
+      }
+      console.log('provider: ',quantityInStock)
+    })
+  }
   function arrayNavbar(){
     let material = {}
     let category = {}
@@ -108,6 +135,10 @@ function Provider({children}){
     setProductList,
     isLoadedNavBar,
     isLoadedProduct,
+    quantityList,
+    localStorageChange, 
+    setLocalStorageChange,
+    headerCartCheckboxRef,
     arrayNavbar,
     arrayProductList
   }

@@ -11,22 +11,23 @@ function ProductDetail(){
   const [quantityInStock, setQuantityInStock] = useState(0)
   const [chooseSize, setChooseSize] = useState('')
   const [chooseImg, setChooseImg] = useState(0)
-  const {arrayProductList, productList, isLoadedProduct} = useContext(GlobalVariable)
+  const {arrayProductList, productList, isLoadedProduct, setLocalStorageChange, localStorageChange, headerCartCheckboxRef} = useContext(GlobalVariable)
   const {slug} = useParams()
 
   useEffect(() => {
-    let productIndex = arrayProductList()
-    console.log('product index:', productIndex)
-    let temp = productList.find( prod => prod['product_id'] === productIndex[slug])
-    console.log('temp: ',temp)
-    if (temp.size.length > 0){
-      let index = temp.size.findIndex(item => item.pivot['product_size_quantily'] > 0)
-      setChooseSize(temp.size[index]['size_id'])
-      setQuantityInStock(temp.size[index].pivot['product_size_quantily'])
+    if (isLoadedProduct){
+      let productIndex = arrayProductList()
+      console.log('product index:', productIndex)
+      let temp = productList.find( prod => prod['product_id'] === productIndex[slug])
+      console.log('temp: ',temp)
+      if (temp.size.length > 0){
+        let index = temp.size.findIndex(item => item.pivot['product_size_quantily'] > 0)
+        setChooseSize(temp.size[index]['size_name'])
+        setQuantityInStock(temp.size[index].pivot['product_size_quantily'])
+      }
+      setProduct(temp)
     }
-    setProduct(temp)
-    
-  }, [slug])
+  }, [slug, isLoadedProduct])
   console.log('quantity: ',quantity)
 
   if (!isLoadedProduct || product.length === 0) {
@@ -75,7 +76,7 @@ function ProductDetail(){
               <div className={clsx(styles.productDetailSizeGroup)}>
                 {product.size.length > 0 && product.size.map(size => {
                   let isChoosed = false
-                  if (chooseSize === size['size_id'])
+                  if (chooseSize === size['size_name'])
                     isChoosed = true
                   console.log('chooseSize: ',chooseSize,'size ',size['size_id'],isChoosed)
                   return(
@@ -85,7 +86,7 @@ function ProductDetail(){
                     disabled={size.pivot['product_size_quantily'] === 0}
                     onClick={()=>{
                       setQuantityInStock(size.pivot['product_size_quantily'])
-                      setChooseSize(size['size_id'])
+                      setChooseSize(size['size_name'])
                       setQuantity(1)
                       console.log('choose size & quantity in stock: ',chooseSize, quantityInStock)
                     }}
@@ -146,6 +147,9 @@ function ProductDetail(){
                             size: chooseSize
                           })
                         localStorage.setItem('cart', JSON.stringify(carts))
+                        setLocalStorageChange(!localStorageChange)
+                        headerCartCheckboxRef.current.checked = true
+                        // window.location.reload()
                       }
                       else{
                         carts = [{

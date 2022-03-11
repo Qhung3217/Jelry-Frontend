@@ -31,8 +31,8 @@
   font-weight: 500;
 }
 
-.cartWrapContent {
-}
+/* .cartWrapContent {
+} */
 
 .cartContainer {
   padding: 0 15px;
@@ -98,9 +98,9 @@
   text-align: center;
 }
 .actionCheckout{
-  display: block;
+  display: block !important;
   border-radius: 4px;
-  background-color: chocolate;
+  background-color: chocolate!important;
   color: white;
   letter-spacing: 1px;
   padding: 20px 12px;
@@ -108,7 +108,8 @@
 }
 
 .actionCheckout:hover {
-  border: 1px solid chocolate;
+  border: 1px solid chocolate !important;
+  background-color: white !important;
   color: var(--primary-color);
 }
 
@@ -129,5 +130,103 @@
 .spanText {
   font-size: 14px;
   font-weight: 300;
+  line-height: 21px;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.cartImage {
+  width: 100px;
+}
+
+.cartInfo {
+  padding: 20px 0 20px 15px;
+  flex: 1;
+}
+
+.cartTitleAndAction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.cartTitle {
+  font-size: 16px;
+  font-weight: 700;
+  
+}
+
+.cartActionRemove {
+  font-size: 14px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transform: scale(1);
+}
+.hidden{
+  visibility: hidden;
+}
+.cartActionRemove:hover{
+  color: var(--hover-color);
+  transform: scale(1.1);  
+}
+
+.cartPrice {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 5px;
+  line-height: 21px;
+}
+
+.cartSize {
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 5px;
+  line-height: 21px;
+}
+
+.cartInfoBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartQuantityGroup {
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  line-height: 21px;
+}
+
+.cartAction {
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  color: #abafb2;
+  border: 1px solid #ededed;
+  cursor: pointer;
+}
+
+.cartQuantity {
+  display: block;
+  background-color: #ededed;
+  border: 1px solid #ededed;
+  width: 35px;
+  height: 25px;
+  line-height: 23px;
+}
+
+
+.cartTotal {
+  font-size: 16px;
+  font-weight: 600;
   line-height: 21px;
 }
