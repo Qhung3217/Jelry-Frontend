@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { currencyFormat } from '../../Utils/NumberFormat'
 import styles from './Header.module.css'
@@ -118,7 +118,7 @@ function HeaderActionCart(){
               Xem giỏ hàng
             </Link>
             <Link 
-              to="/" 
+              to="/checkout" 
               className={clsx("btn dark large")}
               onClick={handleClickItem}
             >

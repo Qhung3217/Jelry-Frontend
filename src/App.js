@@ -8,6 +8,7 @@ import LandingPage from './Components/LandingPage'
 import Product from './Components/Product'
 import ProductDetail from './Components/ProductDetail'
 import Cart from './Components/Cart'
+import Checkout from './Components/Checkout'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage/>}></Route>
             <Route path="/cart" element={<Cart/>}></Route>
+            <Route path="/checkout" element={<Checkout/>}></Route>
             <Route path="/collections/:slug" element={<Product/>}></Route>
             <Route path="/products/:slug" element={<ProductDetail/>}></Route>
             <Route path="/pages/gioi-thieu" element={<Introduce/>}></Route>
