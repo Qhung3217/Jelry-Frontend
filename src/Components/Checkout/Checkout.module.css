@@ -5,6 +5,18 @@
   margin-bottom: 50px;
   margin-top: 50px;
 }
+.alert{
+  color: #FF1818;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 4px;
+  position: absolute;
+  top: 100%;
+  left: 10px;
+}
+.inputAlert{
+  border: 1px solid #FF1818 !important;
+}
 .rowReverse {
   flex-direction: row-reverse;
 }
@@ -152,7 +164,8 @@
 }
 .formGroup {
   display: block;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+  position: relative;
 }
 .formLabel {
   font-size: 16px;
@@ -160,7 +173,7 @@
   line-height: 18px;
   color: #333;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .formInput {
   display: block;
@@ -180,11 +193,13 @@
 }
 .formGroupEmail{
   flex: 1;
+  position: relative;
 }
 
 .formGroupTel{
   width: 30%;
   margin-left: 8px;
+  position: relative;
 }
 .formGroup a {
   color: #338dbc;
