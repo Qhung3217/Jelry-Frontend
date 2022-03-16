@@ -9,7 +9,7 @@ function Provider({children}){
   const [quantityList, setQuantityList] = useState([])
   const [localStorageChange, setLocalStorageChange] = useState(false)
   const headerCartCheckboxRef = useRef(null)
-  let url = 'http://jelry.test/api'
+  const url = 'http://jelry.test/api'
 
   useEffect(() => {
     let navbarUrl = url + '/material'
@@ -140,7 +140,8 @@ function Provider({children}){
     setLocalStorageChange,
     headerCartCheckboxRef,
     arrayNavbar,
-    arrayProductList
+    arrayProductList,
+    url
   }
 
   return(

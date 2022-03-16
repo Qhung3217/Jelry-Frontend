@@ -1,10 +1,11 @@
 import clsx from 'clsx'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Checkout.module.css'
 import { currencyFormat } from '../../Utils/NumberFormat'
 import {handleSubmit} from './Functions'
 import {validateEmail, validatePhone} from '../../Utils/Regex'
+import Alert from '../Alert'
 
 function Checkout() {
   const [carts, setCarts] = useState([])
@@ -14,20 +15,35 @@ function Checkout() {
   const [isTelsEmpty, setIsTelsEmpty] = useState(false)
   const [isTelsValid, setIsTelsValid] = useState(true)
   const [isAddressEmpty, setIsAddressEmpty] = useState(false)
+  const [isProvinceEmpty, setIsProvinceEmpty] = useState(false)
+  const [isDistrictEmpty, setIsDistrictEmpty] = useState(false)
+  const [isWardEmpty, setIsWardEmpty] = useState(false)
+  const [message, setMessage] = useState()
+  const inputName = useRef(null)
+
   const [userInfo, setUserInfo] = useState({
     'customer_name': '',
     'customer_email': '',
     'customer_tel': '',
+    'customer_province': '',
+    'customer_district': '',
+    'customer_ward': '',
     'customer_address': '',
     'total': ''
   })
-  const allValid = {
+  let allValid = {
     'name': isNameEmpty,
     'email': !!isEmailValid && isEmailEmpty,
     'tels': !!isTelsValid && isTelsEmpty,
+    'province': isProvinceEmpty,
+    'district': isDistrictEmpty,
+    'ward': isWardEmpty,
     'address': isAddressEmpty
   }
+  
   useEffect(()=>{
+    if (inputName.current)
+      inputName.current.focus()
     let cart = localStorage.getItem('cart')
     if (cart) {
       cart = JSON.parse(cart)
@@ -35,7 +51,7 @@ function Checkout() {
       setCarts(cart)
     }
   },[])
-
+  
   const total = useMemo(()=>{
     let rlt
     if (carts.length > 0) {
@@ -47,10 +63,56 @@ function Checkout() {
     return rlt
   },[carts])
 
+  function fetchInvoiceDetailStore(data){
+    const url = 'http://jelry.test/api'
+    let urlReq = url + '/invoice'
+    fetch(urlReq, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(data=>setMessage({...data, 'trigger': true}))
+      .catch(err=>console.log(err))
 
+      console.log("mess",message)
+  }
+  
+  const handleSubmit = () => {
+    console.log(userInfo, carts, allValid)
+  
+    if (!allValid.name && !allValid.email && !allValid.tels && !allValid.address && !allValid.province && !allValid.ward && !allValid.district){
+      console.log(userInfo, carts, allValid)
+      const products = []
+      carts.forEach(cart => {
+        products.push({
+          'id':cart.product['product_id'],
+          'price': cart.product['product_price'],
+          'quantity': cart.quantity,
+          'size': cart.size
+        })
+      })
+      const payload = {
+        ...userInfo,
+        'products': products
+      }
+      fetchInvoiceDetailStore(payload)
+      localStorage.removeItem('cart')
+    }
+    
+  }
 
   return(
     <div className="grid wide">
+      {message && <Alert 
+        trigger={message.trigger}
+        error={message.error}
+        message={message.message}
+        title={message.title}
+      />}
       <h1 className={clsx(styles.titleH1)}>Thanh toán</h1>
       <div className={clsx(styles.rowReverse, "row")}>
         <div className="col l-5">
@@ -67,8 +129,9 @@ function Checkout() {
                     <div className={clsx(styles.cartTitle)}>{cart.product['product_name']}</div>
                     <div className={clsx(styles.cartPrice)}>{currencyFormat(cart.product['product_price']*cart.quantity)}</div>
                   </div>
+                  
                   <div className={clsx(styles.cartSize)}>
-                    {cart.size}
+                    {cart.size !== "None" && cart.size}
                   </div>
                 </div>
               </div>
@@ -105,6 +168,7 @@ function Checkout() {
                   className={clsx(styles.formInput,{
                     [styles.inputAlert]: isNameEmpty
                   })}
+                  ref={inputName}
                   value={userInfo.customer_name}
                   onChange={e=>{
                     setUserInfo({...userInfo, 'customer_name': e.target.value})
@@ -170,6 +234,70 @@ function Checkout() {
                   </div>
                 </div>
               </div>
+
+              <div className={clsx(styles.formGroup)}>
+                <label htmlFor="checkout_province" className={clsx(styles.formLabel)}>Tỉnh/Thành phố</label>
+                <input 
+                  type="text" 
+                  id="checkout_province" 
+                  name="checkout_province" 
+                  className={clsx(styles.formInput, {
+                    [styles.inputAlert]: isProvinceEmpty
+                  })}
+                  value={userInfo.customer_province}
+                  onChange={e=>{
+                    setUserInfo({...userInfo, 'customer_province': e.target.value})
+                    setIsProvinceEmpty(false)
+                  }}
+                  onBlur={e=>e.target.value === '' && setIsProvinceEmpty(true)}
+                />
+                <div className={clsx(styles.alert)}>
+                  {isProvinceEmpty && <p>Vui lòng nhập tỉnh/thành phố</p>}
+                </div>
+              </div>
+
+              <div className={clsx(styles.formGroup)}>
+                <label htmlFor="checkout_district" className={clsx(styles.formLabel)}>Quận/Huyện</label>
+                <input 
+                  type="text" 
+                  id="checkout_district" 
+                  name="checkout_district" 
+                  className={clsx(styles.formInput, {
+                    [styles.inputAlert]: isDistrictEmpty
+                  })}
+                  value={userInfo.customer_district}
+                  onChange={e=>{
+                    setUserInfo({...userInfo, 'customer_district': e.target.value})
+                    setIsDistrictEmpty(false)
+                  }}
+                  onBlur={e=>e.target.value === '' && setIsDistrictEmpty(true)}
+                />
+                <div className={clsx(styles.alert)}>
+                  {isDistrictEmpty && <p>Vui lòng nhập quận/huyện</p>}
+                </div>
+              </div>
+
+              <div className={clsx(styles.formGroup)}>
+                <label htmlFor="checkout_ward" className={clsx(styles.formLabel)}>Xã/Phường/Thị trấn</label>
+                <input 
+                  type="text" 
+                  id="checkout_ward" 
+                  name="checkout_ward" 
+                  className={clsx(styles.formInput, {
+                    [styles.inputAlert]: isWardEmpty
+                  })}
+                  value={userInfo.customer_ward}
+                  onChange={e=>{
+                    setUserInfo({...userInfo, 'customer_ward': e.target.value})
+                    setIsWardEmpty(false)
+                  }}
+                  onBlur={e=>e.target.value === '' && setIsWardEmpty(true)}
+                />
+                <div className={clsx(styles.alert)}>
+                  {isWardEmpty && <p>Vui lòng nhập xã/phường/thị trấn</p>}
+                </div>
+              </div>
+
               <div className={clsx(styles.formGroup)}>
                 <label htmlFor="checkout_address" className={clsx(styles.formLabel)}>Địa chỉ</label>
                 <input 
@@ -185,20 +313,23 @@ function Checkout() {
                     setIsAddressEmpty(false)
                   }}
                   onBlur={e=>e.target.value === '' && setIsAddressEmpty(true)}
+                  placeholder="Ví dụ: số nhà, tên đường, ..."
                 />
                 <div className={clsx(styles.alert)}>
                   {isAddressEmpty && <p>Vui lòng nhập địa chỉ</p>}
                 </div>
               </div>
 
+              
+
               <div className={clsx(styles.formGroup)}>
                 <div className={clsx(styles.formGroupWrap)}>
                   <Link to="/cart">Giỏ hàng</Link>
                   <button 
                     className={clsx(styles.btnSubmit)}
-                    onClick={()=>{
-                      handleSubmit(userInfo, carts, allValid)
-                    }}
+                    onClick={()=>
+                      handleSubmit()
+                    }
                   >
                     Hoàn tất đơn hàng
                   </button>

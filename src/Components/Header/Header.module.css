@@ -327,3 +327,12 @@ a:hover > .cartName{
   align-items: stretch;
   justify-content: space-between;
 }
+
+/* PC width >= 1024px */
+
+/* Tablet width >= 740px and width < 1024px */
+@media screen and (min-width: 740px) and (max-width: 1023px){
+
+}
+
+/* Mobile width < 740px */
