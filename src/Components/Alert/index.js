@@ -2,7 +2,7 @@ import { useState } from 'react'
 import clsx from 'clsx'
 import styles from './Alert.module.css'
 
-function Alert({trigger = true, error, message, title}){
+function Alert({trigger = true, error, message, title, setMes}){
   const [show, setShow] = useState(trigger)
   return(
     <>
@@ -34,6 +34,7 @@ function Alert({trigger = true, error, message, title}){
                 })}
                 onClick={()=>{
                   setShow(!show)
+                  setMes()
                   if (error === false){
                     let url = (new URL(window.location.href))
                     window.location.replace(url.origin)

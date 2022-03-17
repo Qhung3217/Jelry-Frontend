@@ -13,6 +13,7 @@ function ProductDetail(){
   const [chooseImg, setChooseImg] = useState(0)
   const {arrayProductList, productList, isLoadedProduct, setLocalStorageChange, localStorageChange, headerCartCheckboxRef} = useContext(GlobalVariable)
   const {slug} = useParams()
+  const [isSoldOut, setIsSoldOut] = useState(true)
 
   useEffect(() => {
     if (isLoadedProduct){
@@ -21,9 +22,13 @@ function ProductDetail(){
       let temp = productList.find( prod => prod['product_id'] === productIndex[slug])
       console.log('temp: ',temp)
       if (temp.size.length > 0){
+        setIsSoldOut(!!temp.size.reduce((result, size)=> result += size.pivot['product_size_quantily'],0))
+        console.log('isSoldOut: ',isSoldOut)
         let index = temp.size.findIndex(item => item.pivot['product_size_quantily'] > 0)
-        setChooseSize(temp.size[index]['size_name'])
-        setQuantityInStock(temp.size[index].pivot['product_size_quantily'])
+        if (index !== -1){
+          setChooseSize(temp.size[index]['size_name'])
+          setQuantityInStock(temp.size[index].pivot['product_size_quantily'])
+        }
       }
       setProduct(temp)
     }
@@ -72,7 +77,8 @@ function ProductDetail(){
           <div className="col l-6">
             <div className={clsx(styles.productDetailMain)}>
               <h1 className={clsx(styles.productDetailName)}>{product['product_name']}</h1>
-              <span className={clsx(styles.productDetailPrice)}>{currencyFormat(product['product_price'])}</span>
+              <span className={clsx(styles.productDetailPrice)}>{isSoldOut ? currencyFormat(product['product_price']) : <p>Hết hàng</p>}</span>
+              {isSoldOut && 
               <div className={clsx(styles.productDetailSizeGroup)}>
                 {product.size.length > 0 && product.size.map(size => {
                   let isChoosed = false
@@ -94,7 +100,8 @@ function ProductDetail(){
                     {size['size_name']}
                   </button>
                 )})}
-              </div>
+              </div>}
+              {isSoldOut &&
               <div className={clsx(styles.productDetailAction)}>
                 <div className={clsx(styles.productDetailQuantityGroup)}>
                   <button 
@@ -119,7 +126,7 @@ function ProductDetail(){
                     className={clsx(styles.productDetailQuantityBtn,'btn')}
                     onClick={()=>{
                       let newQuantity 
-                      if (quantityInStock >= quantity){
+                      if (quantityInStock > quantity){
                         newQuantity = quantity + 1
                         setQuantity(newQuantity)
                       }
@@ -166,7 +173,7 @@ function ProductDetail(){
                     Thêm vào giỏ
                   </button>
                 </div>
-              </div>
+              </div>}
               <div className={clsx(styles.productDetailDesc)} dangerouslySetInnerHTML={{__html: product['product_desc']}}>
               </div>
             </div>

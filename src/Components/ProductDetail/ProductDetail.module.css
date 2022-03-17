@@ -6,21 +6,28 @@
   border: 10px solid var(--hover-color);
 }
 .productDetailMainThumb{
+  height: 500px;
   width: 610px;
+  object-fit: cover;
 }
 .productDetailMainThumb img{
   width: 100%;
+  height: 100%;
   display: block;
 }
 
 .productDetailSubThumb{
   margin-top: 15px;
+
 }
 .productDetailSubThumbItem {
   width: 150px;
+  height: 150px;
+  object-fit: cover;
 }
 .productDetailSubThumbItem img{
   width: 100%;
+  height: 100%;
   display: block;
   cursor: pointer;
 }
@@ -38,9 +45,30 @@
   font-weight: 600;
   color:chocolate;
 }
+.productDetailPrice p{
+  font-size: 20px;
+  line-height: 20px;
+  color: #333;
+}
 .productDetailSizeGroup {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.productDetailSize {
+  border: 1px solid var(--primary-color) !important;
+  color: var(--primary-color);
+  font-size: 12px!important;
+  font-weight: 500;
+}
+.productDetailSize:hover{
+  color: white!important;
+  background-color: var(--primary-color)!important;
+}
+
+.productDetailSize:disabled:hover{
+  background-color: #f5f5f5!important;
+  color: #666!important;
 }
 button:disabled {
   background-color: #f5f5f5!important;
@@ -48,12 +76,6 @@ button:disabled {
   cursor: default!important;
   border: none!important;
   opacity: 0.5;
-}
-.productDetailSize {
-  border: 1px solid var(--primary-color) !important;
-  color: var(--primary-color);
-  font-size: 12px!important;
-  font-weight: 500;
 }
 .productDetailAction {
   display: flex;

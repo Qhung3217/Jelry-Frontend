@@ -6,7 +6,7 @@ function LandingPage() {
     <div className="grid wide">
       <div className="row">
 
-        <div className="col l-3">
+        <div className="col l-3 m-6 s-12">
           <div className={clsx(styles.banner)}>
             <div className={clsx(styles.bannerImg)}>
               <Link to="/collections/trang-suc-bac">
@@ -18,7 +18,7 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="col l-3">
+        <div className="col l-3 m-6 s-12">
           <div className={clsx(styles.banner)}>
               <div className={clsx(styles.bannerImg)}>
                   <Link to="/collections/da-tu-nhien">
@@ -29,7 +29,7 @@ function LandingPage() {
             </div>
         </div>
 
-        <div className="col l-3">
+        <div className="col l-3 m-6 s-12">
           <div className={clsx(styles.banner)}>
             <div className={clsx(styles.bannerImg)}>
                 <Link to="/collections/trang-suc-vang">
@@ -40,7 +40,7 @@ function LandingPage() {
           </div>
         </div>
 
-        <div className="col l-3">
+        <div className="col l-3 m-6 s-12">
           <div className={clsx(styles.banner)}>
             <div className={clsx(styles.bannerImg)}>
               <Link to="/collections/goods">

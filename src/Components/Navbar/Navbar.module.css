@@ -9,21 +9,13 @@
   color: var(--primary-color);
   margin-left: 35px;
   position: relative;
-  transition: all 0.25s linear;
 }
 .navbarItem:first-child{
   margin-left: 0;
 }
 
-.navbarItem:hover > a{
-  color: var(--hover-color);
-}
-.navbarItem:hover .subNavbarList{
-  /* display: block; */
-  visibility: visible;
-  opacity: 1;
-  transform: rotateX(0);
-}
+
+
 .navbarItem i{
   color: inherit;
   font-weight: 500;
@@ -32,6 +24,7 @@
 .navbarItem > a{
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 14px;
   font-weight: 400;
   color: var(--primary-color);
@@ -72,6 +65,136 @@
   border-bottom: none;
 }
 
-.subNavbarItem:hover > a {
-  color: var(--hover-color);
+
+.noDisplayInDesktop,.noDisplayInDesktopBlock{
+  display: none!important;
+}
+.onlyDisplayInDesktop {
+  display: block;
+}
+
+@media screen and (min-width: 1024px){
+  .navbarItem:hover .subNavbarList{
+    /* display: block; */
+    visibility: visible;
+    opacity: 1;
+    transform: rotateX(0);
+  }
+
+  .navbarItem:hover > a{
+    color: var(--hover-color);
+  }
+
+  .subNavbarItem:hover > a {
+    color: var(--hover-color);
+  }
+
+}
+@media screen and (max-width: 1023px){
+  .onlyDisplayInDesktop {
+    display: none!important;
+  }
+  .noDisplayInDesktopBlock{
+    display: block!important;
+  }
+  .noDisplayInDesktop{
+    display: flex!important;
+  }
+  ul.navbarList{
+    flex-direction: column;
+    font-family: "Work Sans", sans-serif;
+  }
+  li.navbarItem{
+    margin-left: 0px;
+    margin-right: 0px;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+
+  li.navbarItem div {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eeeeee;
+  }
+
+  li.navbarItem > div > i {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  li.navbarItem:first-child{
+    margin-left: 0px;
+  }
+
+  div.activeSubNavbar ~ .subNavbarList{
+    visibility: visible!important;
+    left: 0;
+    opacity: 1;
+    transition:  opacity 0.3s ease-in-out, left 0.3s ease-in-out;
+  }
+
+  ul.subNavbarList {
+    visibility: hidden;
+    position: absolute;
+    border-top: none;
+    background-color: #fff;
+    font-family: 'Work Sans', sans-serif;
+    box-shadow: none;
+    margin-top: 4px;
+    width: 100%;
+    top: 0px;
+    left: -100%;
+    transform-origin: left;
+    opacity: 0;
+    transform: rotateX(0);
+    transition:  transform 0.3s ease-in-out, left 0.3s ease-in-out,visibility 0.3s ease-in-out,opacity 0.3s ease-in-out;
+  }
+  
+  li.subNavbarItem {
+    border-bottom: 1px solid var(--line-color);
+    min-width: 145px;
+    margin-left: 15px;
+    margin-right: 15px;
+    display: block;
+  }
+  li.subNavbarItem > a {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    white-space: nowrap;
+    padding: 15px 15px 15px 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--primary-color);
+  }
+  li.subNavbarItem span {
+    margin-right: 5px;
+  }
+  li.subNavbarItem:nth-last-child(1){
+    border-bottom: 1px solid var(--line-color);
+  }
+  .subNavbarReturn span {
+    font-size: 14px;
+    color: black;
+    font-weight: 500;
+  }
+  .subNavbarReturn i {
+    font-size: 15px;
+    font-weight: 700;
+    color: black;
+  }
+
+  .subNavbarViewAll a{
+    font-size: 14px!important;
+    font-weight: 700!important;
+  }
+
+
+}
+@media screen and (min-width: 740px) and (max-width: 1023px){
+  
 }

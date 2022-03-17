@@ -112,6 +112,7 @@ function Checkout() {
         error={message.error}
         message={message.message}
         title={message.title}
+        setMes={setMessage}
       />}
       <h1 className={clsx(styles.titleH1)}>Thanh toán</h1>
       <div className={clsx(styles.rowReverse, "row")}>
