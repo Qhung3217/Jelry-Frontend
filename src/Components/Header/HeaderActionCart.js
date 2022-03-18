@@ -39,7 +39,7 @@ function HeaderActionCart(){
   // }
   return(
     <div className={clsx(styles.headerActionCart)}>
-      <label className={clsx(styles.cartAction)} htmlFor="cartCheckbox">
+      <label className={clsx(styles.cartAction, styles.cartClose)} htmlFor="cartCheckbox" id="label">
         <i className='bx bx-shopping-bag'></i>
         <span className={clsx(styles.cartCountWrap)} data-count={carts.length}>
           <span className={clsx(styles.cartCount)} >{carts.length}</span>
@@ -50,6 +50,18 @@ function HeaderActionCart(){
         id="cartCheckbox" 
         className={clsx(styles.cartCheckbox)} 
         ref={headerCartCheckboxRef}
+        onChange={e=>{
+          const label = document.getElementById('label')
+          if (e.target.checked === false){
+            label.classList.add(styles.cartClose)
+            document.querySelector('body').classList.remove('preventScroll')
+
+          }
+          else{
+            label.classList.remove(styles.cartClose)
+            document.querySelector('body').classList.add('preventScroll')
+          }
+        }}
       />
       <label className={clsx(styles.modal)} htmlFor="cartCheckbox"></label>
       <div className={clsx(styles.cartDropdown)}>

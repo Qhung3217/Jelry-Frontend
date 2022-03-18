@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState, useRef, useContext } from 'react'
+import { useState, useRef, useContext, useEffect } from 'react'
 import {GlobalVariable} from '../GlobalVariable'
 import { currencyFormat } from '../../Utils/NumberFormat'
 import { Link } from 'react-router-dom'
@@ -11,15 +11,17 @@ function Search(){
   const [searchResult, setSearchResult] = useState([])
   const {productList} = useContext(GlobalVariable)
   const activeSearch = useRef(null)
-  const handleSearch = () => {
+  
+  useEffect(()=> {
     const result = productList.filter(prod=>{
       let name = prod['product_name'].toLocaleLowerCase()
+      // let name = key.toLocaleLowerCase()
       return name.includes(searchKey.toLocaleLowerCase())
     })
-    console.log('result: ', result)
+    console.log('result: ', result,'searchKey: ', searchKey)
     setSearchResult(result)
-  }
-
+  }, [searchKey])
+  
   const handleClickLink = () => {
     setSearchKey('')
     activeSearch.current.checked = false
@@ -27,7 +29,7 @@ function Search(){
 
   return (
     <div className={clsx(styles.searchBox)}>
-      <label className={clsx(styles.searchAction)} htmlFor="searchCheckbox">
+      <label className={clsx(styles.searchAction, styles.onlyDisplayInDesktop)} htmlFor="searchCheckbox">
         <i className='bx bx-search' ></i>
       </label>
       <input 
@@ -36,7 +38,7 @@ function Search(){
         className={clsx(styles.searchCheckbox)}
         ref={activeSearch}
         />
-      <label className={clsx(styles.modal)} htmlFor="searchCheckbox"></label>
+      <label className={clsx(styles.modal, styles.onlyDisplayInDesktop)} htmlFor="searchCheckbox"></label>
       <div className={clsx(styles.searchDropdown)}>
         
         <h3 className={clsx(styles.searchTitle)}>Tìm kiếm</h3>
@@ -47,7 +49,6 @@ function Search(){
             value={searchKey}
             onChange={(e)=>{
               setSearchKey(e.target.value)
-              handleSearch()
             }}
             className={clsx(styles.searchInputKey)} 
             placeholder="Tìm kiếm sản phẩm..."
@@ -60,7 +61,7 @@ function Search(){
           </button>
           <div 
             className={clsx(styles.searchSuggestWrap, {
-              [styles.show]: searchResult.length > 0
+              [styles.show]: searchResult.length > 0 && searchKey !== ''
             })}
           >
             <div className={clsx(styles.searchSuggest)}>

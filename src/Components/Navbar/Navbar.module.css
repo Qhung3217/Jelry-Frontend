@@ -112,7 +112,7 @@
     text-align: left;
   }
 
-  li.navbarItem div {
+  li.navbarItem div, li.navbarItem a{
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -121,7 +121,10 @@
     text-transform: uppercase;
     border-bottom: 1px solid #eeeeee;
   }
-
+  li.navbarItem a{
+    text-align: left;
+    justify-content: flex-start;
+  }
   li.navbarItem > div > i {
     font-size: 15px;
     font-weight: 600;
@@ -195,6 +198,6 @@
 
 
 }
-@media screen and (min-width: 740px) and (max-width: 1023px){
+@media screen and (max-width: 739px){
   
 }

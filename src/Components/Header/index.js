@@ -18,6 +18,7 @@ function Header() {
         </div>
       </div>
       <div className="row no-gutters">
+
         <div className="col l-12 m-12 s-12">
           <div className={clsx(styles.headerMain, 'row no-gutters')}>
             
@@ -26,7 +27,13 @@ function Header() {
                 <label 
                   className={clsx(styles.headerMenuLogo)} 
                   htmlFor="checkboxSidebar"
-                  onClick={e => e.target.closest('.'+styles.headerMenuLogo).classList.toggle(styles.headerMenuLogoEvent)}
+                  onClick={e => {
+                    const lb = e.target.closest('.'+styles.headerMenuLogo)
+                    if (lb.classList.contains(styles.headerMenuLogoEvent))
+                      lb.classList.remove(styles.headerMenuLogoEvent)
+                    else
+                      lb.classList.add(styles.headerMenuLogoEvent)
+                  }}
                 >
                   <i className='bx bx-menu'></i>
                 </label>
@@ -36,14 +43,30 @@ function Header() {
                   ref={checkbox} 
                   className={clsx(styles.checkboxSidebar)}
                   onChange={(e)=>{
+                    console.log(e.target)
                     if (e.target.checked)
-                      document.querySelector('body').style.overflow = "hidden"
+                      document.querySelector('body').classList.add('preventScroll')
                     else
-                      document.querySelector('body').style.overflow = "auto"
+                      document.querySelector('body').classList.remove('preventScroll')
+
                   }}
                   />
+                <label 
+                    className={clsx(styles.modalMS)} 
+                    htmlFor="checkboxSidebar"
+                    onClick={e=>{
+                      const lb = document.querySelector('.'+styles.headerMenuLogo)
+                      if (lb.classList.contains(styles.headerMenuLogoEvent))
+                        lb.classList.remove(styles.headerMenuLogoEvent)
+                      else
+                        lb.classList.add(styles.headerMenuLogoEvent)
+                    }}
+                ></label>
                 <div className={clsx(styles.sidebar)}>
-                  <Navbar checkbox={checkbox}/>
+                  <Navbar checkbox={checkbox} classN={{
+                    'el': styles.headerMenuLogo,
+                    'class': styles.headerMenuLogoEvent
+                    }}/>
                 </div>
               </div>
             </div>
@@ -63,6 +86,10 @@ function Header() {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="col l-0 m-12 s-12">
+          <Search/>
         </div>
       </div>
     </header>

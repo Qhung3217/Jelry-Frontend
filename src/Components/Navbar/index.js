@@ -5,7 +5,7 @@ import styles from './Navbar.module.css'
 import SubNavbar from './SubNavbar'
 import { GlobalVariable } from '../GlobalVariable'
 // truyen slug and id qua contextData
-function Navbar({checkbox}) {
+function Navbar({checkbox, classN}) {
   // const [isLoaded, setIsLoaded] = useState(false)
   const [items, setItems] = useState([])
   const {navbarItems, isLoadedNavBar} = useContext(GlobalVariable)
@@ -24,21 +24,20 @@ function Navbar({checkbox}) {
               {item['material_name']}
               {item.category.length > 0 && <i className='bx bx-chevron-down'></i>}
             </Link>
-            <div 
-              className={clsx(styles.noDisplayInDesktop)}
-              id={"subNav-"+item['material_id']}
-              onClick={e => {
-                const div = document.getElementById("subNav-"+item['material_id'])
-                console.log(div.nextSibling)
-                div.classList.toggle(styles.activeSubNavbar)
-                if (!div.nextSibling)
-                  checkbox.current.checked = false
-              }}
-            >
-              {item['material_name']}
-              {item.category.length > 0 &&<i className='bx bx-chevron-right'></i>}
-            </div>
-            {item.category.length > 0 && 
+            {item.category.length > 0 ?
+              <><div 
+                className={clsx(styles.noDisplayInDesktop)}
+                id={"subNav-"+item['material_id']}
+                onClick={e => {
+                  const div = document.getElementById("subNav-"+item['material_id'])
+                  console.log(div.nextSibling)
+                  div.classList.toggle(styles.activeSubNavbar)
+                  
+                }}
+              >
+                {item['material_name']}
+                <i className='bx bx-chevron-right'></i>
+              </div>
               <SubNavbar 
                 cates={item.category} 
                 prefix={'/collections'} 
@@ -46,7 +45,22 @@ function Navbar({checkbox}) {
                   'slug': item['material_slug'],
                   'name': item['material_name'],
                 }}
-              />}
+                checkbox={checkbox}
+                classN={classN}
+              /></>
+            :
+              <Link 
+                to={'/collections/'+item['material_slug']} 
+                className={clsx(styles.noDisplayInDesktop)}
+                onClick={()=> {
+                  document.querySelector('.'+classN.el).classList.remove(classN.class)
+                  checkbox.current.checked = false
+                  document.querySelector('body').classList.remove('preventScroll')
+                }}
+              >
+                {item['material_name']}
+              </Link>
+            }
           </li>
         ))}
         {/* <li className={clsx(styles.navbarItem)}>
