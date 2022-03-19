@@ -73,7 +73,7 @@ function Cart(){
         <p className={clsx(styles.subTitle)}>Có <span>{countProd} sản phẩm</span></p>
       </div>
       <div className={clsx(styles.cartWrapContent, 'row')}>
-        <div className="col l-8">
+        <div className="col l-8 m-12 s-12">
           <div className={clsx(styles.cartContainer)}>
             {carts.length === 0 ? 
               <p className={clsx(styles.cartEmpty)}>Giỏ hàng của bạn đang trống</p>
@@ -100,7 +100,7 @@ function Cart(){
                       {currencyFormat(cart.product['product_price'])}
                     </div>
                     <div className={clsx(styles.cartSize)}>
-                      {cart.size}
+                      {cart.size !== 'None' && cart.size}
                     </div>
                     <div className={clsx(styles.cartInfoBottom)}>
                       <div className={clsx(styles.cartQuantityGroup)}>
@@ -139,8 +139,9 @@ function Cart(){
           </div>
         </div>
 
-        <div className="col l-4">
+        <div className="col l-4 m-12 s-12">
           <div className={clsx(styles.cartSideBoxOrder)}>
+            
             <div className={clsx(styles.cartSideBoxOrderTitle)}>
               <h3>Thông tin đơn hàng</h3>
             </div>

@@ -25,6 +25,9 @@ function SubNavbar({ cates, prefix, parent, checkbox, classN }) {
             checkbox.current.checked = false
             document.querySelector('body').classList.remove('preventScroll')
             document.querySelector('.'+classN.el).classList.remove(classN.class)
+            const divParent = document.querySelector('#'+parent.id)
+            divParent.classList.remove(divParent.dataset.class)
+            console.log(document.querySelector('#'+parent.id))
           }}
         >
             Xem tất cả "{parent.name}"

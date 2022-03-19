@@ -28,6 +28,7 @@ function Navbar({checkbox, classN}) {
               <><div 
                 className={clsx(styles.noDisplayInDesktop)}
                 id={"subNav-"+item['material_id']}
+                data-class={styles.activeSubNavbar}
                 onClick={e => {
                   const div = document.getElementById("subNav-"+item['material_id'])
                   console.log(div.nextSibling)
@@ -44,6 +45,7 @@ function Navbar({checkbox, classN}) {
                 parent={{
                   'slug': item['material_slug'],
                   'name': item['material_name'],
+                  'id': "subNav-"+item['material_id'],
                 }}
                 checkbox={checkbox}
                 classN={classN}

@@ -28,3 +28,20 @@
 .footerItem a:hover{
   color: var(--hover-color);
 }
+
+@media screen and (max-width: 749px){
+  .footerList{
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  .footerItem{
+    margin-bottom: 16px; 
+  }
+  .footerItem:nth-last-child(1){
+    margin-bottom: 20px;
+  }
+  .footerItem a{
+    padding: 10px;
+  }
+}

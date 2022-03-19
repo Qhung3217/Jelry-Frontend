@@ -3,7 +3,6 @@ import { useState, useEffect, useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Checkout.module.css'
 import { currencyFormat } from '../../Utils/NumberFormat'
-import {handleSubmit} from './Functions'
 import {validateEmail, validatePhone} from '../../Utils/Regex'
 import Alert from '../Alert'
 
@@ -99,6 +98,7 @@ function Checkout() {
         ...userInfo,
         'products': products
       }
+      console.log('payload: ',payload)
       fetchInvoiceDetailStore(payload)
       localStorage.removeItem('cart')
     }
@@ -116,47 +116,62 @@ function Checkout() {
       />}
       <h1 className={clsx(styles.titleH1)}>Thanh toán</h1>
       <div className={clsx(styles.rowReverse, "row")}>
-        <div className="col l-5">
+        <div className="col l-5 m-12 s-12">
           <div className={clsx(styles.sidebar)}>
-            <h1 className={clsx(styles.titleSideBar)}>Thông tin đơn hàng</h1>
-            {carts.map( (cart,index) => (
-              <div key={index} className={clsx(styles.cartItem)}>
-                <div className={clsx(styles.cartImg)}>
-                  <img src={cart.product.image[0]['image_url']} alt={cart.product['product_name']} />
-                  <span className={clsx(styles.cartQuantity)}>{cart.quantity}</span>
-                </div>
-                <div className={clsx(styles.cartInfo)}>
-                  <div className={clsx(styles.cartInfoTop)}>
-                    <div className={clsx(styles.cartTitle)}>{cart.product['product_name']}</div>
-                    <div className={clsx(styles.cartPrice)}>{currencyFormat(cart.product['product_price']*cart.quantity)}</div>
-                  </div>
-                  
-                  <div className={clsx(styles.cartSize)}>
-                    {cart.size !== "None" && cart.size}
-                  </div>
-                </div>
+            <div 
+              className={clsx(styles.cartSummary)}
+              onClick={(e)=> e.target.closest('.'+styles.cartSummary).classList.toggle(styles.cartOpen)}
+            >
+              <div className={clsx(styles.cartSummaryIcon)}>
+                <i className='bx bx-cart'></i>
+                <span>Hiển thị thông tin đơn hàng</span>
+                <span className={clsx(styles.summaryOpen)}>Ẩn thông tin đơn hàng</span>
+                <i className='bx bx-chevron-down' ></i>
+                <i className={clsx(styles.summaryOpen,'bx bx-chevron-up')}></i>
               </div>
-            ))}
-            <div className={clsx(styles.totalGroupWrap)}>
-              <div className={clsx(styles.totalGroup)}>
-                <div className={clsx(styles.totalName)}>Tạm tính</div>
-                <div className={clsx(styles.totalPrice)}>{currencyFormat(total)}</div>
-              </div>
-
-              <div className={clsx(styles.totalGroup)}> 
-                <div className={clsx(styles.totalName)}>Phí vận chuyển</div>
-                <div className={clsx(styles.totalPrice)}>Miễn phí</div>
-              </div>
+              <div className={clsx(styles.cartSummaryTotal)}>{currencyFormat(total)}</div>
             </div>
-            <div className={clsx(styles.totalGroupWrap)}>
-              <div className={clsx(styles.totalGroup)}>
-                <div className={clsx(styles.totalName)}>Tổng cộng</div>
-                <div className={clsx(styles.totalPrice)}><span>VNĐ</span>{currencyFormat(total)}</div>
+            
+            <div className={clsx(styles.cartDetail)}>
+              <h1 className={clsx(styles.titleSideBar)}>Thông tin đơn hàng</h1>
+              {carts.map( (cart,index) => (
+                <div key={index} className={clsx(styles.cartItem)}>
+                  <div className={clsx(styles.cartImg)}>
+                    <img src={cart.product.image[0]['image_url']} alt={cart.product['product_name']} />
+                    <span className={clsx(styles.cartQuantity)}>{cart.quantity}</span>
+                  </div>
+                  <div className={clsx(styles.cartInfo)}>
+                    <div className={clsx(styles.cartInfoTop)}>
+                      <div className={clsx(styles.cartTitle)}>{cart.product['product_name']}</div>
+                      <div className={clsx(styles.cartPrice)}>{currencyFormat(cart.product['product_price']*cart.quantity)}</div>
+                    </div>
+              
+                    <div className={clsx(styles.cartSize)}>
+                      {cart.size !== "None" && cart.size}
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div className={clsx(styles.totalGroupWrap)}>
+                <div className={clsx(styles.totalGroup)}>
+                  <div className={clsx(styles.totalName)}>Tạm tính</div>
+                  <div className={clsx(styles.totalPrice)}>{currencyFormat(total)}</div>
+                </div>
+                <div className={clsx(styles.totalGroup)}>
+                  <div className={clsx(styles.totalName)}>Phí vận chuyển</div>
+                  <div className={clsx(styles.totalPrice)}>Miễn phí</div>
+                </div>
+              </div>
+              <div className={clsx(styles.totalGroupWrap)}>
+                <div className={clsx(styles.totalGroup)}>
+                  <div className={clsx(styles.totalName)}>Tổng cộng</div>
+                  <div className={clsx(styles.totalPrice)}><span>VNĐ</span>{currencyFormat(total)}</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="col l-7">
+        <div className="col l-7 m-12 s-12">
           <div className={clsx(styles.main)}>
             <h1 className={styles.mainTitle}>Thông tin giao hàng</h1>
             <div className={clsx(styles.checkoutForm)}>

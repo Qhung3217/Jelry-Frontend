@@ -32,6 +32,13 @@ function HeaderActionCart(){
   }
   const handleClickItem = () => {
     headerCartCheckboxRef.current.checked = false
+    const labelActiveCartDropDown = document.querySelector('#label')
+    const body = document.querySelector('body')
+    console.log(labelActiveCartDropDown)
+    if (labelActiveCartDropDown) {
+      labelActiveCartDropDown.classList.toggle(labelActiveCartDropDown.dataset.class)
+    }
+    body.classList.toggle('preventScroll')
   }
   // const handleClickOutside = e => {
   //   if (!e.target.closet('.'+styles.cartDropdown))
@@ -39,7 +46,12 @@ function HeaderActionCart(){
   // }
   return(
     <div className={clsx(styles.headerActionCart)}>
-      <label className={clsx(styles.cartAction, styles.cartClose)} htmlFor="cartCheckbox" id="label">
+      <label 
+        className={clsx(styles.cartAction, styles.cartClose)} 
+        htmlFor="cartCheckbox" 
+        id="label"
+        data-class={styles.cartClose}
+      >
         <i className='bx bx-shopping-bag'></i>
         <span className={clsx(styles.cartCountWrap)} data-count={carts.length}>
           <span className={clsx(styles.cartCount)} >{carts.length}</span>
@@ -63,7 +75,7 @@ function HeaderActionCart(){
           }
         }}
       />
-      <label className={clsx(styles.modal)} htmlFor="cartCheckbox"></label>
+      <label className={clsx(styles.modal)} htmlFor="cartCheckbox" id="modalActiveCartDropDown"></label>
       <div className={clsx(styles.cartDropdown)}>
         <h3 className={clsx(styles.cartTitle)}>Giỏ hàng</h3>
         <div className={clsx(styles.cartContent)}>
@@ -102,7 +114,7 @@ function HeaderActionCart(){
                     </span>
                   </div>
                   <div className={clsx(styles.cartSizeAndPrice)}>
-                    <span className={clsx(styles.cartSize)}>{cart.size}</span>
+                    <span className={clsx(styles.cartSize)}>{cart.size !== 'None' && cart.size}</span>
                     <span className={clsx(styles.cartQuantityXPrice)}>
                       <span className={clsx(styles.cartQuantity)}>{cart.quantity}</span>
                       x

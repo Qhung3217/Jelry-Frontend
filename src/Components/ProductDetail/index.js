@@ -43,10 +43,10 @@ function ProductDetail(){
     return (
       <div className="grid wide">
         <div className="row">
-          <div className="col l-6">
+          <div className="col l-6 m-6 s-12">
             <div className={clsx(styles.productDetailThumbGroup)}>
               <div className="row">
-                <div className="col l-12">
+                <div className="col l-12 m-12 s-12">
                   <div className={clsx(styles.productDetailMainThumb)}>
                     <img src={product.image[chooseImg]['image_url']} alt="" />
                   </div>
@@ -55,7 +55,7 @@ function ProductDetail(){
               <div className={clsx(styles.productDetailSubThumb, 'row')}>
                 {product.image.map((image,index) => {
                   return(
-                  <div key={image['image_id']} className="col l-3">
+                  <div key={image['image_id']} className="col l-3 m-3 s-3">
                     <div 
                       className={clsx(styles.productDetailSubThumbItem, 
                                                 {[styles.productDetailThumbActive]: index===chooseImg})
@@ -74,7 +74,7 @@ function ProductDetail(){
               </div> */}
             </div>
           </div>
-          <div className="col l-6">
+          <div className="col l-6 m-6 s-12">
             <div className={clsx(styles.productDetailMain)}>
               <h1 className={clsx(styles.productDetailName)}>{product['product_name']}</h1>
               <span className={clsx(styles.productDetailPrice)}>{isSoldOut ? currencyFormat(product['product_price']) : <p>Hết hàng</p>}</span>
@@ -88,7 +88,10 @@ function ProductDetail(){
                   return(
                   <button 
                     key={size['size_id']} 
-                    className={clsx(styles.productDetailSize,'btn',{'dark': isChoosed})}
+                    className={clsx(styles.productDetailSize,'btn',{
+                      'dark': isChoosed,
+                      [styles.noDisplay]: size['size_name']==='None'
+                    })}
                     disabled={size.pivot['product_size_quantily'] === 0}
                     onClick={()=>{
                       setQuantityInStock(size.pivot['product_size_quantily'])
@@ -156,7 +159,8 @@ function ProductDetail(){
                         localStorage.setItem('cart', JSON.stringify(carts))
                         setLocalStorageChange(!localStorageChange)
                         headerCartCheckboxRef.current.checked = true
-                        // window.location.reload()
+                        window.scrollTo(0, 0)
+                        document.querySelector('body').classList.toggle('preventScroll')
                       }
                       else{
                         carts = [{

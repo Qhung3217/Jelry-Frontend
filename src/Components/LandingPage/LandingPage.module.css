@@ -4,8 +4,13 @@
 
 }
 
-.bannerImg {
-  
+.bannerImg a {
+  width: 100%;
+  display: block;
+}
+
+.bannerImg a img{
+  width: 100%;
 }
 
 .bannerBtn {

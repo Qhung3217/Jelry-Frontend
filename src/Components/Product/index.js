@@ -11,6 +11,7 @@ function Product() {
   const { slug } = useParams()
   const [material, category] = arrayNavbar()
   const productIndex = arrayProductList()
+  const [showGoToTop, setShowGoToTop] = useState(false)
 
   useEffect(() => {
     if (material[slug]) {
@@ -41,7 +42,15 @@ function Product() {
     console.log(material, category, productIndex)
     console.log(productList)
   }, [slug])
-
+  useEffect(()=>{
+    const handleScroll = ()=>{
+      setShowGoToTop(window.scrollY>=200)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return()=>{
+      window.removeEventListener('scroll', handleScroll)
+    }
+  },[])
   if (!isLoadedProduct) return <h1>Loading...</h1>
   else
     if (products.length === 0)
@@ -53,12 +62,19 @@ function Product() {
     else
       return (
         <div className={clsx(styles.wrap)}>
+          {showGoToTop&& <div className={clsx(styles.returnToTop)}>
+            <Link to="#">
+              <i
+                className='bx bx-arrow-to-top'
+              ></i>
+            </Link>
+          </div>}
           <h1 className={clsx(styles.productTitle)}>{(material[slug] && material[slug].name) || (category[slug] && category[slug].name)}</h1>
           <div className="grid wide">
             <div className="row">
               {products.length > 0 &&
                 products.map((product) => (
-                  <div key={product["product_id"]} className="col l-3">
+                  <div key={product["product_id"]} className="col l-3 m-6 s-6">
                     <div className={clsx(styles.productItem)}>
                       <Link className={clsx(styles.productThumb)} to={"/products/" + product["product_slug"]}>
                         {product.image[0] &&
@@ -66,6 +82,9 @@ function Product() {
                           src={product.image[0]['image_url']}
                           alt=""
                         />}
+                        <span className={clsx(styles.productPriceMobile)}>
+                          {currencyFormat(product["product_price"])}
+                        </span>
                       </Link>
                       <div className={clsx(styles.productDetail)}>
                         <div className={clsx(styles.productName)}>

@@ -226,3 +226,82 @@
 .btnSubmit:hover {
   filter: brightness(1.2)
 }
+.cartSummary{
+  display: none;
+}
+.cartDetail{
+  display: block;
+}
+.summaryOpen{
+  display: none;
+}
+@media screen and (max-width: 1023px) {
+  .titleSideBar{
+    display: none;
+  }
+  .cartDetail{
+    margin-top: 16px;
+    display: none;
+  }
+  .cartOpen ~ .cartDetail{
+    display: block;
+  }
+  .cartOpen .cartSummaryIcon i, 
+  .cartOpen .cartSummaryIcon span{
+    display: none;
+  }
+  .cartOpen .summaryOpen{
+    display: block!important;
+  }
+  .cartSummary{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e3e3e3;
+    border-bottom: 1px solid #e3e3e3;
+    padding: 18px 0;
+  }
+  .cartSummaryIcon{
+    color: #338dbc;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+  }
+  .cartSummaryIcon i:first-child{
+    display: block!important;
+  }
+  .cartSummaryIcon i{
+    font-size: 24px;
+  }
+  .cartSummaryIcon span+i{
+    font-size: 14px;
+  }
+  .cartSummaryTotal{
+    font-size: 18px;
+    font-weight: 400;
+    color: #4b4b4b;
+  }
+  .main{
+    padding-left: 0;
+    text-align: center;
+    margin-top: 18px;
+  }
+  .checkoutForm{
+    width: 100%;
+  }
+  .formGroupEmail{
+    margin-bottom: 24px;
+
+  }
+  .formGroupTel{
+    width: 100%;
+    margin-left: 0;
+  }
+  .formGroupWrap{
+    flex-wrap: wrap;
+  }
+  .formLabel{
+    text-align: left;
+  }
+}

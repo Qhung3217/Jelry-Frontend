@@ -116,4 +116,33 @@ background-color: #f5f5f5 !important;
   font-weight: 300;
   line-height: 21px;
   margin-left: 50px;
+  margin-bottom: 10px;
+}
+.productDetailDesc p:nth-last-child(1){
+  margin-bottom: 0px;
+}
+.noDisplay{
+  display: none!important;
+}
+@media screen and (max-width: 1023px){
+  .productDetailMainThumb{
+    width: 100%;
+    height: 100%;
+  }
+  .productDetailSubThumb{
+    margin-top: 4px;
+  }
+  .productDetailSubThumbItem{
+    width: 100%;
+    height: 100%;
+  }
+  .productDetailName{
+    text-align: center;
+  }
+  .productDetailMain{
+    margin-top: 20px;
+  }
+  .productDetailDesc p {
+    margin-left: 4px;
+  }
 }
