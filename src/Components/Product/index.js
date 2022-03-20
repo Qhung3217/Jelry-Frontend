@@ -61,7 +61,7 @@ function Product() {
       )
     else
       return (
-        <div className={clsx(styles.wrap)}>
+        <div className={clsx(styles.wrap, "grid wide")}>
           {showGoToTop&& <div className={clsx(styles.returnToTop)}>
             <Link to="#">
               <i
@@ -69,8 +69,12 @@ function Product() {
               ></i>
             </Link>
           </div>}
-          <h1 className={clsx(styles.productTitle)}>{(material[slug] && material[slug].name) || (category[slug] && category[slug].name)}</h1>
-          <div className="grid wide">
+          <div className="row no-gutters">
+            <div className="col l-12 m-12 s-12">
+              <h1 className={clsx(styles.productTitle)}>{(material[slug] && material[slug].name) || (category[slug] && category[slug].name)}</h1>
+            </div>
+          </div>
+          {/* <div className="grid wide"> */}
             <div className="row">
               {products.length > 0 &&
                 products.map((product) => (
@@ -100,7 +104,7 @@ function Product() {
                   </div>
                 ))}
             </div>
-          </div>
+          {/* </div> */}
         </div>
       )
 }

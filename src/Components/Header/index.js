@@ -89,7 +89,7 @@ function Header() {
         </div>
 
         <div className="col l-0 m-12 s-12">
-          <Search/>
+          <Search mobile={true}/>
         </div>
       </div>
     </header>

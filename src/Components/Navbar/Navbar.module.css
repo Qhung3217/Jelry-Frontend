@@ -90,7 +90,7 @@
   }
 
 }
-@media screen and (max-width: 1023px){
+@media screen and (max-width: 1113px){
   .onlyDisplayInDesktop {
     display: none!important;
   }

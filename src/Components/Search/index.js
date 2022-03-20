@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import styles from './Search.module.css'
 
 
-function Search(){
+function Search({ mobile = false}){
   const [searchKey, setSearchKey] = useState('')
   const [searchResult, setSearchResult] = useState([])
   const {productList} = useContext(GlobalVariable)
@@ -28,8 +28,16 @@ function Search(){
   }
 
   return (
-    <div className={clsx(styles.searchBox)}>
-      <label className={clsx(styles.searchAction, styles.onlyDisplayInDesktop)} htmlFor="searchCheckbox">
+    <div className={clsx(styles.searchBox,{
+      [styles.displayNone]: mobile === false
+    })}>
+      <label 
+        className={clsx(styles.searchAction, {
+          [styles.onlyDisplayInDesktop]: mobile === false,
+          [styles.displayNone]: mobile === true
+        })} 
+        htmlFor="searchCheckbox"
+      >
         <i className='bx bx-search' ></i>
       </label>
       <input 

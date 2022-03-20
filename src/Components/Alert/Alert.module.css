@@ -85,3 +85,8 @@
   margin-top: 20px;
   margin-bottom: 10px;
 }
+@media screen and (max-width: 739px) {
+  .container{
+    width: 350px;
+  }
+}

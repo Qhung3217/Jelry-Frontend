@@ -115,7 +115,7 @@ function Checkout() {
         setMes={setMessage}
       />}
       <h1 className={clsx(styles.titleH1)}>Thanh toán</h1>
-      <div className={clsx(styles.rowReverse, "row")}>
+      <div className={clsx(styles.rowReverse, "row no-gutters")}>
         <div className="col l-5 m-12 s-12">
           <div className={clsx(styles.sidebar)}>
             <div 
