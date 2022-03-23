@@ -1,0 +1,9 @@
+.alert{
+   color: #FF6B6B;
+   margin-bottom: 4px;
+}
+.alert p {
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 12px;
+}

@@ -1,0 +1,239 @@
+
+.mainPage{
+   font-family: 'Source Sans Pro', sans-serif;
+   background-color: #f4f6f9;
+   color: #333;
+}
+.sidebar{
+   width: 250px;
+   position: fixed;
+   top: 0;
+   left: 0;
+   bottom: 0;
+}
+.content{
+   margin-left: 250px;
+   height: 100%;
+   min-height: 100vh;
+   padding: 0 8px;
+}
+
+
+.wrap {
+
+}
+
+.card {
+   box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   word-wrap: break-word;
+   background-color: #fff;
+   border: 0 solid rgba(0,0,0,.125);
+   border-radius: 4px;
+}
+
+.back {
+   font-size: 18px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.back i{
+   margin-right: 4px;
+   font-size: 16px;
+}
+
+.cardHeader {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   background-color: transparent;
+   border-bottom: 1px solid rgba(0,0,0,.125);
+   /* padding: 12px 20px; */
+   padding: 0 20px;
+   position: relative;
+   border-top-left-radius: 4px;
+   border-top-right-radius: 4px;
+}
+.cardTitle{
+   line-height: 55px;
+   font-size: 24px;
+}
+.createBtn{
+   margin-right: 50px;
+   display: block;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   /* position: relative; */
+}
+.reloadItem{
+   margin-right: 50px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+}
+.reloadItem i{
+   margin-left: 5px;
+   font-size: 28px;
+}
+
+.createBtn i{
+   margin-left: 5px;
+   font-size: 21px;
+}
+.cardTools {
+   display: flex;
+   align-items: center;
+}
+
+.cardBody {
+   flex: 1 1 auto;
+   min-height: 1px;
+   display: block;
+   width: 100%;
+   /* padding: 20px */
+}
+
+.table {
+   width: 100%;
+   background-color: transparent;
+   border-collapse: collapse;
+}
+.table>thead>tr>th:first-of-type, .table td:first-of-type{
+   padding-left: 24px
+}
+.table>thead>tr>th, .table td{
+   padding: 12px;
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 24px;
+   overflow-wrap: break-word;
+   border-bottom: 2px solid #dee2e6;
+}
+.table td{
+   padding: 12px;
+   border-bottom: 1px solid #dee2e6;
+   font-size: 16px;
+   font-weight: 400;
+}
+
+.table tbody tr:hover{
+   color: #212529;
+   background-color: rgba(0,0,0,.075);
+}
+
+.iconGroup{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.icon{
+   font-size: 24px;
+   display: block;
+   cursor: pointer;
+}
+.iconRemove{
+   color: #dc3545;
+}
+.iconEdit{
+   position: relative;
+   top: -1px;
+   color: #28a745;
+}
+
+.table i + a{
+   margin-left: 16px;
+}
+
+.medium{
+   width: 60%;
+   margin: 0 auto;
+}
+.small{
+   width: 40%;
+   margin: 0 auto;
+}
+.small .cardBody {
+   padding: 20px
+}
+.formGroup {
+   margin-bottom: 16px;
+}
+.formGroup label{
+   display: block;
+   margin-bottom: 8px;
+   text-align: left;
+   font-size: 16px;
+   font-weight: 700;
+   line-height: 24px;
+}
+.formGroup:nth-last-child(1){
+   margin-bottom: 0px;
+}
+
+.formControl {
+   display: block;
+   width: 100%;
+   height: calc(2.25rem + 2px);
+   padding: 0.375rem 0.75rem;
+   font-size: 16px;
+   font-weight: 400;
+   line-height: 1.5;
+   color: #495057;
+   background-color: #fff;
+   background-clip: padding-box;
+   border: 1px solid #ced4da;
+   border-radius: 4px;
+   box-shadow: inset 0 0 0 transparent;
+   transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.formControl:focus {
+   color: #495057;
+   background-color: #fff;
+   border-color: #80bdff;
+   outline: 0;
+   box-shadow: inset 0 0 0 transparent;
+}
+.cardFooter {
+   padding: 12px 20px;
+   background-color: rgb(0,0,0,0.03);
+}
+.primary {
+   background-color: #007bff;
+   color: white
+}
+.btn {
+   display: inline-block;
+   font-weight: 400;
+   color: #212529;
+   text-align: center;
+   vertical-align: middle;
+   user-select: none;
+   cursor: pointer;
+   background-color: transparent;
+   border: 1px solid transparent;
+   text-decoration: none;
+   padding: 0.375rem 0.75rem;
+   font-size: 1rem;
+   line-height: 1.5;
+   border-radius: 0.25rem;
+   transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.btnPrimary{
+   color: #fff;
+   background-color: #007bff;
+   border-color: #007bff;
+   box-shadow: none;
+}
+.btnPrimary:hover{
+   color: #fff;
+   background-color: #0069d9;
+   border-color: #0062cc;
+}
+
+

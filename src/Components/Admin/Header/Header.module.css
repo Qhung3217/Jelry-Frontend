@@ -1,0 +1,12 @@
+.header {
+   padding: 15px 8px;
+   
+}
+.title {
+   display: block;
+   text-align: left;
+   font-size: 30px;
+   font-weight: 500;
+   line-height: 35px;
+   margin-left: 12px;
+}
