@@ -5,7 +5,7 @@ import Header from '../Header'
 import Table from '../Table'
 import {GlobalVariable} from '../../GlobalVariable'
 
-function MaterialList(){
+function CategoryList(){
    const { url } = useContext(GlobalVariable)
    const [items, setItems] = useState()
    const [isLoaded, setIsLoaded] = useState(true)
@@ -20,23 +20,46 @@ function MaterialList(){
          }
       })
          .then(res => res.json())
-         .then(data=>setItems(data.data))
+         .then(data=>{
+            const arr = []
+            data.data.forEach(dt => {
+               
+               if (dt.category.length > 0) {
+                  dt.category.forEach(cate => {
+                     const temp = {
+                        'category_id': cate['category_id'],
+                        'category_name': cate['category_name'],
+                        'material_name': dt['material_name'],
+                        'material_id': dt['material_id']
+                     }
+                     arr.push(temp)
+                  })
+               }
+            })
+            return arr
+         })
+         .then(result => setItems(result))
          .then(()=>setIsLoaded(false))
          .catch(err=>{
             setIsLoaded(true)
             console.log('Loaded material failed: ' + err.message)
          })
+         console.log('item: ',items)
    },[reload])
 
    const th = [
       {
          'name': 'ID',
-         'name_code': 'material_id'
+         'name_code': 'category_id'
       }, 
       {
          'name': 'Name',
+         'name_code': 'category_name'
+      },
+      {
+         'name': 'Material',
          'name_code': 'material_name'
-      }
+      },
    ]
    const showSearchResult = (result) => {
       setItems(result)
@@ -49,22 +72,22 @@ function MaterialList(){
    else
       return(
          <div className={clsx(styles.wrap)}>
-            <Header title="Material"/>
+            <Header title="Category"/>
             <Table
                th={th}
                items={items} 
-               title={"Material Table"} 
-               href="/admin/material/create"
+               title={"Category Table"} 
+               href="/admin/category/create"
                showSearchResult={showSearchResult}
-               nameKey="material_name"
+               nameKey="category_name"
                reloadCallback={handleReload}
                urlAPI={url}
-               APIName="material"
-               tableEditName='material'
+               APIName="category"
+               tableEditName='category'
             />
 
          </div>
       )
 }
 
-export default MaterialList
+export default CategoryList

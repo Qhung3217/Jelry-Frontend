@@ -4,7 +4,7 @@ import styles from './Search.module.css'
 
 function Search({data, setSearchResult, nameKey, reloadFunc}){
    const [searchKey, setSearchKey] = useState()
-   console.log("sdas",data[0][nameKey])
+   // console.log("sdas",data[0][nameKey])
    const handleSearch = () => {
       const list = data.filter(dt => {
          const lowerCase = dt[nameKey].toLocaleLowerCase()

@@ -169,6 +169,10 @@ function ProductDetail(){
                           size: chooseSize
                         }]
                         localStorage.setItem('cart', JSON.stringify(carts))
+                        setLocalStorageChange(!localStorageChange)
+                        headerCartCheckboxRef.current.checked = true
+                        window.scrollTo(0, 0)
+                        document.querySelector('body').classList.toggle('preventScroll')
                       }
                       // window.location.reload()
 

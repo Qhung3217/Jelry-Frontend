@@ -1,10 +1,26 @@
 import clsx from 'clsx'
+import {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {Parser} from 'html-to-react'
 import styles from './Sidebar.module.css'
 
 function Sidebar() {
-
+   const [choose, setChoose] = useState(3)
+   const url = window.location.href
+   const idx = {
+      'material': 0,
+      'category': 1,
+      'product': 2,
+      'size': 3,
+      'invoice': 4
+   }
+   useEffect(()=>{
+      console.log('url: ', url)
+      let temp = url.split('/')[4]
+      
+      setChoose(idx[temp])
+      console.log(idx[temp],choose,temp)
+   }, [url])
    const navs = [
       {
          'name': 'Material',
@@ -52,10 +68,14 @@ function Sidebar() {
                className={clsx(styles.nav)}
             >
                {navs.map((nav,index) => (
-                  <li key={index} className={clsx(styles.navItem, {
-                     [styles.active]: index === 0,
-                     [styles.mr12]: index === 3 || index === 4,
-                  })}>
+                  <li 
+                     key={index} 
+                     className={clsx(styles.navItem, {
+                        [styles.active]: index === choose,
+                        [styles.mr12]: index === 3 || index === 4,
+                     })}
+                     onClick={()=> setChoose(index)}
+                  >
                      <Link to={nav.path} className={clsx(styles.navLink)}>
                         
                         <p>

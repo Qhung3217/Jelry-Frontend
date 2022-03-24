@@ -5,14 +5,14 @@ import Header from '../Header'
 import Table from '../Table'
 import {GlobalVariable} from '../../GlobalVariable'
 
-function MaterialList(){
+function ProductList(){
    const { url } = useContext(GlobalVariable)
    const [items, setItems] = useState()
    const [isLoaded, setIsLoaded] = useState(true)
    const [reload, setReload] = useState(false)
 
    useEffect(()=>{
-      const urlReq = url + '/material'
+      const urlReq = url + '/product'
       fetch(urlReq, {
          'headers': {
             'Content-Type': 'application/json',
@@ -20,23 +20,42 @@ function MaterialList(){
          }
       })
          .then(res => res.json())
-         .then(data=>setItems(data.data))
+         .then(data=>{
+            setItems(data.data)
+            console.log(data)
+         })
          .then(()=>setIsLoaded(false))
          .catch(err=>{
             setIsLoaded(true)
-            console.log('Loaded material failed: ' + err.message)
+            console.log('Loaded product failed: ' + err.message)
          })
    },[reload])
 
    const th = [
       {
          'name': 'ID',
-         'name_code': 'material_id'
+         'name_code': 'product_id'
       }, 
       {
          'name': 'Name',
-         'name_code': 'material_name'
+         'name_code': 'product_name'
+      },
+      {
+         'name': 'Price',
+         'name_code': 'product_price'
+      },
+      {
+         'name': 'Image',
+         'name_code': 'product_name'
+      },
+      {
+         'name': 'Size',
+         'name_code': 'size',
+         'columnsShow': ['size_name'],
+         'type': 'array',
+         'pivot': 'product_size_quantily'
       }
+
    ]
    const showSearchResult = (result) => {
       setItems(result)
@@ -53,18 +72,18 @@ function MaterialList(){
             <Table
                th={th}
                items={items} 
-               title={"Material Table"} 
-               href="/admin/material/create"
+               title={"Product Table"} 
+               href="/admin/product/create"
                showSearchResult={showSearchResult}
-               nameKey="material_name"
+               nameKey="product_name"
                reloadCallback={handleReload}
                urlAPI={url}
-               APIName="material"
-               tableEditName='material'
+               APIName="product"
+               tableEditName='category'
             />
 
          </div>
       )
 }
 
-export default MaterialList
+export default ProductList

@@ -38,9 +38,11 @@ function SubNavbar({ cates, prefix, parent, checkbox, classN }) {
             <Link 
               to={prefix+'/'+cate['category_slug']}
               onClick={()=> {
-                checkbox.current.checked = false
-                document.querySelector('.'+classN.el).classList.remove(classN.class)
-                document.querySelector('body').classList.remove('preventScroll')
+                if (window.screen.availWidth < 1023){
+                  checkbox.current.checked = false
+                  document.querySelector('.'+classN.el).classList.remove(classN.class)
+                  document.querySelector('body').classList.remove('preventScroll')
+                }
               }}
             >
               <span className={clsx(styles.noDisplayInDesktop)}>-</span> {cate['category_name']}

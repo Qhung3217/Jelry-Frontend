@@ -1,9 +1,12 @@
 .alert{
    color: #FF6B6B;
    margin-bottom: 4px;
+   padding-left: 100px;
+   text-align: left;
 }
 .alert p {
    font-size: 16px;
    font-weight: 700;
    line-height: 12px;
+   margin-bottom: 4px;
 }

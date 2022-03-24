@@ -22,9 +22,9 @@ function Navbar({checkbox, classN}) {
           <li key={item['material_id']} className={clsx(styles.navbarItem)}>
             <Link to={'/collections/'+item['material_slug']} className={clsx(styles.onlyDisplayInDesktop)}>
               {item['material_name']}
-              {item.category.length > 0 && <i className='bx bx-chevron-down'></i>}
+              {item.category.length > 0 && item.category[0]['category_name'].split('-')[0] !== 'None'&& <i className='bx bx-chevron-down'></i>}
             </Link>
-            {item.category.length > 0 ?
+            {item.category.length > 0 && item.category[0]['category_name'].split('-')[0] !== 'None'?
               <><div 
                 className={clsx(styles.noDisplayInDesktop)}
                 id={"subNav-"+item['material_id']}

@@ -5,7 +5,7 @@ function Alert({errors}){
    return (
       <div className={clsx(styles.alert)}>
          {errors.map(error => (
-            <p>{error}</p>
+            <p>- {error}</p>
          ))}
       </div>
    )
