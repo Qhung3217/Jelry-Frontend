@@ -10,7 +10,7 @@ function ProductList(){
    const [items, setItems] = useState()
    const [isLoaded, setIsLoaded] = useState(true)
    const [reload, setReload] = useState(false)
-
+   const [imgs, setImgs] = useState({})
    useEffect(()=>{
       const urlReq = url + '/product'
       fetch(urlReq, {
@@ -29,8 +29,24 @@ function ProductList(){
             setIsLoaded(true)
             console.log('Loaded product failed: ' + err.message)
          })
+            
    },[reload])
-
+   useEffect(()=> {
+      console.log(items)
+      let obj = {}
+      items && items.forEach(item => {
+         if (item.image.length > 0){
+            let temp =[]
+            item.image.forEach(img => temp.push(img['image_url']))
+            obj = {
+               ...obj,
+               [item['product_id']]: temp
+            }
+         } 
+      })
+      items && setImgs(obj)
+      console.log(imgs)
+   }, [items])
    const th = [
       {
          'name': 'ID',
@@ -45,18 +61,16 @@ function ProductList(){
          'name_code': 'product_price'
       },
       {
-         'name': 'Image',
-         'name_code': 'product_name'
-      },
-      {
          'name': 'Size',
          'name_code': 'size',
          'columnsShow': ['size_name'],
          'type': 'array',
          'pivot': 'product_size_quantily'
       }
-
    ]
+
+   
+   
    const showSearchResult = (result) => {
       setItems(result)
    }
@@ -68,7 +82,7 @@ function ProductList(){
    else
       return(
          <div className={clsx(styles.wrap)}>
-            <Header title="Material"/>
+            <Header title="Product"/>
             <Table
                th={th}
                items={items} 
@@ -80,6 +94,7 @@ function ProductList(){
                urlAPI={url}
                APIName="product"
                tableEditName='category'
+               hoverPanel={imgs}
             />
 
          </div>

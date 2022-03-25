@@ -72,25 +72,25 @@ function ProductEdit() {
    }
    return (
       <div className={clsx(styles.wrap)}>
-         <Header title="Material"/>
+         <Header title="Product"/>
          <div className={clsx(styles.card,styles.small)}>
             <div className={clsx(styles.cardHeader,styles.primary)}>
                <Link to="/admin/material" className={clsx(styles.back)}>
                   <i className="fa-solid fa-arrow-left"></i>
                   Quay về 
                </Link>
-               <h3 className={clsx(styles.cardTitle)}>Edit Material {id}</h3>
+               <h3 className={clsx(styles.cardTitle)}>Edit Product {id}</h3>
             </div>
             
             <div className={clsx(styles.cardBody)}>
                {errors.length > 0 && <Alert errors={errors}/>}
                <div className={clsx(styles.formGroup)}>
-               <label htmlFor="materialName">Material Name</label>
+               <label htmlFor="productName">Product Name</label>
                <input
                   type="text"
                   className={clsx(styles.formControl)}
-                  id="materialName"
-                  placeholder="Enter material name"
+                  id="productName"
+                  placeholder="Enter product name"
                   name="name"
                   value={values.name}
                   onChange={handleChange}

@@ -16,7 +16,7 @@ function ProductCreate() {
    const validate = () => {
       const errors = []
       if (values.name.trim() === '')
-         errors.push("Material Name is required")
+         errors.push("Product Name is required")
 
 
       return errors
@@ -52,31 +52,68 @@ function ProductCreate() {
    }
    return (
       <div className={clsx(styles.wrap)}>
-         <Header title="Material"/>
+         <Header title="Product"/>
          <div className={clsx(styles.card,styles.small)}>
             <div className={clsx(styles.cardHeader,styles.primary)}>
-               <Link to="/admin/material" className={clsx(styles.back)}>
+               <Link to="/admin/product" className={clsx(styles.back)}>
                   <i className="fa-solid fa-arrow-left"></i>
                   Quay về 
                </Link>
-               <h3 className={clsx(styles.cardTitle)}>Add Material</h3>
+               <h3 className={clsx(styles.cardTitle)}>Add Product</h3>
             </div>
             
             <div className={clsx(styles.cardBody)}>
                {errors.length > 0 && <Alert errors={errors}/>}
                <div className={clsx(styles.formGroup)}>
-               <label htmlFor="materialName">Material Name</label>
+               <label htmlFor="productName">Product Name</label>
                <input
                   type="text"
                   className={clsx(styles.formControl)}
-                  id="materialName"
-                  placeholder="Enter material name"
+                  id="productName"
+                  placeholder="Enter product name"
                   name="name"
                   onChange={handleChange}
                   maxLength="50"
                />
                </div>
          
+               <div className={clsx(styles.formGroup)}>
+               <label htmlFor="productPrice">Product Price</label>
+               <input
+                  type="text"
+                  className={clsx(styles.formControl)}
+                  id="productPrice"
+                  placeholder="Enter product price"
+                  name="price"
+                  onChange={handleChange}
+                  maxLength="50"
+               />
+               </div>
+
+               <div className={clsx(styles.formGroup)}>
+               <label>Size</label>
+               <input
+                  type="checkbox"
+                  className={clsx(styles.formControl)}
+                  name="size"
+                  onChange={handleChange}
+                  maxLength="50"
+               />
+               </div>
+
+               <div className={clsx(styles.formGroup)}>
+               <label htmlFor="productImage">Product Image</label>
+               <input
+                  type="file"
+                  className={clsx(styles.formControl)}
+                  id="productImage"
+                  placeholder="Choose images"
+                  name="image"
+                  multiple="true"
+                  onChange={handleChange}
+               />
+               </div>
+
             </div>
             <div className={clsx(styles.cardFooter)}>
                <button 

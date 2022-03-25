@@ -3,7 +3,19 @@ import {Link} from 'react-router-dom'
 import styles from '../MainPage.module.css'
 import Search from '../Search'
 
-function Table({th = [], items, title, href, showSearchResult, nameKey, reloadCallback, urlAPI, APIName, tableEditName}) {
+function Table({
+    th = [], 
+    items, 
+    title, 
+    href, 
+    showSearchResult, 
+    nameKey, 
+    reloadCallback, 
+    urlAPI, 
+    APIName, 
+    tableEditName,
+    hoverPanel = undefined
+}) {
     const idKey = nameKey.replace('name','id')
     console.log(idKey)
     const handleDestroy= (id) => {
@@ -60,6 +72,7 @@ function Table({th = [], items, title, href, showSearchResult, nameKey, reloadCa
                     {items && items.map((item,index) => (
                         <tr key={index}>
                         {th.map(el => (
+                            
                             el.type && el.type === 'array' && el.type.length > 0 ?
                             <td key={el.name} style={{"whiteSpace": "pre-line"}}>
                                 {item[el.name_code].map((itm) => {
@@ -74,6 +87,7 @@ function Table({th = [], items, title, href, showSearchResult, nameKey, reloadCa
                             <td key={el.name}>{item[el.name_code]}</td>
                         ))
                         }
+                        
                         <td >
                             <div className={clsx(styles.iconGroup)}>
                                 <i
@@ -93,6 +107,15 @@ function Table({th = [], items, title, href, showSearchResult, nameKey, reloadCa
                                 </Link>
                             </div>
                         </td>
+                        {hoverPanel &&
+                            <div className={clsx(styles.hoverPanel)}>
+                            {hoverPanel[item[idKey]] && hoverPanel[item[idKey]].map(img => (
+                                <div className={clsx(styles.imgItem)}>
+                                    <img src={img} />
+                                </div>
+                            ))}
+                            </div>
+                        }
                         </tr>
                     ))}
                 </tbody>
