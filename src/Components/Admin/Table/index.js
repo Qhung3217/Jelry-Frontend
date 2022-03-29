@@ -109,8 +109,8 @@ function Table({
                         </td>
                         {hoverPanel &&
                             <div className={clsx(styles.hoverPanel)}>
-                            {hoverPanel[item[idKey]] && hoverPanel[item[idKey]].map(img => (
-                                <div className={clsx(styles.imgItem)}>
+                            {hoverPanel[item[idKey]] && hoverPanel[item[idKey]].map((img,index) => (
+                                <div key={index} className={clsx(styles.imgItem)}>
                                     <img src={img} />
                                 </div>
                             ))}
