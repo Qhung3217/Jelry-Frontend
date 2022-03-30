@@ -71,7 +71,8 @@ function ProductCreate() {
    }
    const validate = () => {
       const errors = []
-      console.log(parseInt(values.price))
+      const arr = Object.values(values.size)
+      console.log(parseInt(values.price), arr)
       if (values.name.trim() === '')
          errors.push("Product Name is required")
       if (values.price.trim() === '' || isNaN(parseInt(values.price)))
@@ -80,7 +81,7 @@ function ProductCreate() {
          errors.push("Product desc is required")
       if (values.cate === '-1')
          errors.push("Choose material is required")
-      if (Object.values(values.size) !== null)
+      if (arr.every(ar => ar === null))
          errors.push("Size is required")
       if (values.image === '')
          errors.push("Image is required")
@@ -92,28 +93,57 @@ function ProductCreate() {
       console.log('submit')
       if (errors.length > 0){
          setErrors(errors)
+         window.scrollTo(0,0)
          return;
       }
       
-      const urlReq = url + '/material'
+      const urlReq = url + '/product'
+      // const imgObj = []
+
+      // for (let i = 0; i < values.image.length ; i++){
+      //    imgObj.push(values.image[i])
+
+      // }
+      // const payload = {
+      //    ...values,
+      //    'size': Object.values(values.size),
+      //    'image': imgObj
+      // }
+
+      // console.log('payload ', JSON.stringify(payload))
+
+      const payload = new FormData()
+      payload.append('name', values.name)
+      payload.append('price', values.price)
+      payload.append('desc', values.desc)
+      payload.append('cate', values.cate)
+      Object.values(values.size).forEach((sz,index) => {
+         console.log('sz ',sz)
+         payload.append(`size[${index}]`,sz.id)
+         payload.append(`quantity[${index}]`,sz.quantity)
+      })
+      // payload.append('size', Object.values(values.size))
+      for (let i = 0; i < values.image.length ; i++)
+         payload.append(`image[${i}]`, values.image[i])
+      for (var key of payload.entries()) {
+            console.log(key[0], key[1]);
+      }
+      
       fetch(urlReq, {
          method: 'POST',
-         headers:{
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-         },
-         body: JSON.stringify(values)
+         body: payload
       })
          .then(res=>res.json())   
          .then(data => {
-            if (data.error === false){
-               alert(data.message)
-               let url = window.location.href
-               url = url.slice(0, url.lastIndexOf('/create'))
-               window.location.replace(url)
-            }
-            else
-               alert(data.errors.name)
+            // if (data.error === false){
+            //    alert(data.message)
+            //    let url = window.location.href
+            //    url = url.slice(0, url.lastIndexOf('/create'))
+            //    window.location.replace(url)
+            // }
+            // else
+            //    alert(data.errors.name)
+            console.log('data',data)
          })
    }
    return (
@@ -205,12 +235,10 @@ function ProductCreate() {
                               onChange={e => {
                                  e.target.nextSibling.classList.toggle(styles.disabled)
                                  if (e.target.nextSibling.classList.contains(styles.disabled)){
+                                    let temp = {...values}
+                                    delete temp.size[e.target.id]
                                     setValues({
-                                       ...values,
-                                       'size': {
-                                          ...values.size,
-                                          [e.target.id]: null
-                                       }
+                                       ...temp
                                     })
                                  }
                                  else
@@ -266,13 +294,13 @@ function ProductCreate() {
                   onChange={handleChange}
                   onClick={e => e.target.value=null}
                />
-               <div className={clsx(styles.panelShow)}>
+               {imgShow && <div className={clsx(styles.panelShow)}>
                   {imgShow && imgShow.map((img,index) => (
-                     <div className={clsx(styles.panelItem)}>
-                        <img key={index} src={img} />
+                     <div key={index} className={clsx(styles.panelItem)}>
+                        <img  src={img} />
                      </div>
                   ))}
-               </div>
+               </div>}
                </div>
 
             </div>

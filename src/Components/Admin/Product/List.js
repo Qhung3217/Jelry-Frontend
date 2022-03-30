@@ -37,7 +37,7 @@ function ProductList(){
       items && items.forEach(item => {
          if (item.image.length > 0){
             let temp =[]
-            item.image.forEach(img => temp.push(img['image_url']))
+            item.image.forEach(img => temp.push('http://jelry.test/'+img['image_url']))
             obj = {
                ...obj,
                [item['product_id']]: temp
