@@ -135,14 +135,14 @@ function ProductCreate() {
       })
          .then(res=>res.json())   
          .then(data => {
-            // if (data.error === false){
-            //    alert(data.message)
-            //    let url = window.location.href
-            //    url = url.slice(0, url.lastIndexOf('/create'))
-            //    window.location.replace(url)
-            // }
-            // else
-            //    alert(data.errors.name)
+            if (data.error === false){
+               alert(data.message)
+               let url = window.location.href
+               url = url.slice(0, url.lastIndexOf('/create'))
+               window.location.replace(url)
+            }
+            else
+               alert(data.errors.name)
             console.log('data',data)
          })
    }

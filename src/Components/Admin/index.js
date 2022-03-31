@@ -6,7 +6,9 @@ import Sidebar from './Sidebar'
 import {MaterialList, MaterialCreate, MaterialEdit} from './Material'
 import {CategoryList, CategoryCreate, CategoryEdit} from './Category'
 import {ProductList, ProductCreate, ProductEdit} from './Product'
-import LandingPage from './LandingPage'
+import {SizeList, SizeCreate, SizeEdit} from './Size'
+import {InvoiceList} from './Invoice'
+import Dashboard from './Dashboard'
 function Admin(){
    return (
       <div className={clsx(styles.mainPage)}>
@@ -16,7 +18,7 @@ function Admin(){
          <div className={clsx(styles.content)}>
             <ScrollToTop>
                <Routes>
-                  <Route path="/admin" element={<LandingPage/>}></Route>
+                  <Route path="/admin" element={<Dashboard/>}></Route>
                   <Route path="/admin/material" element={<MaterialList/>}></Route>
                   <Route path="/admin/material/create" element={<MaterialCreate/>}></Route>
                   <Route path="/admin/material/edit/:id" element={<MaterialEdit/>}></Route>
@@ -26,6 +28,11 @@ function Admin(){
                   <Route path="/admin/product" element={<ProductList/>}></Route>
                   <Route path="/admin/product/create" element={<ProductCreate/>}></Route>
                   <Route path="/admin/product/edit/:id" element={<ProductEdit/>}></Route>
+                  <Route path="/admin/size" element={<SizeList/>}></Route>
+                  <Route path="/admin/size/create" element={<SizeCreate/>}></Route>
+                  <Route path="/admin/size/edit/:id" element={<SizeEdit/>}></Route>
+                  <Route path="/admin/invoice" element={<InvoiceList/>}></Route>
+
                </Routes>
             </ScrollToTop>
             

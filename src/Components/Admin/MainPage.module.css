@@ -328,6 +328,11 @@
 .panelItem{
    width: calc(50% - 4px);
    object-fit: cover;
+   margin-bottom: 8px;
+}
+
+.panelItem:nth-last-child(1), .panelItem:nth-last-child(2):nth-child(odd){
+   margin-bottom: 0;
 }
 .panelItem:nth-child(odd){
    margin-right: 8px;

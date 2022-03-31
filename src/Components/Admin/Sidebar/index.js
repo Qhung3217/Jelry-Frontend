@@ -8,11 +8,12 @@ function Sidebar() {
    const [choose, setChoose] = useState(3)
    const url = window.location.href
    const idx = {
-      'material': 0,
-      'category': 1,
-      'product': 2,
-      'size': 3,
-      'invoice': 4
+      'undefined': 0,
+      'material': 1,
+      'category': 2,
+      'product': 3,
+      'size': 4,
+      'invoice': 5
    }
    useEffect(()=>{
       console.log('url: ', url)
@@ -22,6 +23,11 @@ function Sidebar() {
       console.log(idx[temp],choose,temp)
    }, [url])
    const navs = [
+      {
+         'name': 'Dashboard',
+         'icon': '<i className="bx bxs-dashboard"></i>',
+         'path': '/admin'
+      },
       {
          'name': 'Material',
          'icon': '<i className="bx bx-hive"></i>',

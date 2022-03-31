@@ -93,7 +93,7 @@ function ProductList(){
                reloadCallback={handleReload}
                urlAPI={url}
                APIName="product"
-               tableEditName='category'
+               tableEditName='product'
                hoverPanel={imgs}
             />
 

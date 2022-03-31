@@ -9,7 +9,8 @@ function Table({
     title, 
     href, 
     showSearchResult, 
-    nameKey, 
+    nameKey,
+    searchColumn = nameKey, 
     reloadCallback, 
     urlAPI, 
     APIName, 
@@ -45,14 +46,14 @@ function Table({
                     Tải lại
                     <i className='bx bx-refresh'></i>
                 </div>
-                <Link to={href} className={clsx(styles.createBtn)}>
+                {href && <Link to={href} className={clsx(styles.createBtn)}>
                     Thêm mới
                     <i className="fa-solid fa-plus"></i>
-                </Link>
+                </Link>}
                 <Search 
                     setSearchResult={showSearchResult} 
                     data={items} 
-                    nameKey={nameKey}
+                    nameKey={searchColumn}
                     reloadFunc={reloadCallback}
                 />
             </div>
@@ -84,7 +85,7 @@ function Table({
                             </td>
                             :
                             
-                            <td key={el.name}>{item[el.name_code]}</td>
+                            <td key={el.name}>{el.name_code === 'created_at' ? new Date(item[el.name_code]).toLocaleDateString(undefined, { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric'}) :item[el.name_code]}</td>
                         ))
                         }
                         
@@ -96,7 +97,7 @@ function Table({
                                     data-test={item[idKey]}
                                     onClick={() => handleDestroy(item[idKey])}
                                 ></i>
-                                <Link 
+                                {tableEditName && <Link 
                                     to={"/admin/"+ tableEditName +"/edit/"+item[idKey]} 
                                     className={clsx(styles.icon,styles.iconEdit)}
                                 >
@@ -104,7 +105,7 @@ function Table({
                                     className={clsx("fa-solid fa-pen-to-square")}
                                     title="Edit this row item!"
                                     ></i>
-                                </Link>
+                                </Link>}
                             </div>
                         </td>
                         {hoverPanel &&
