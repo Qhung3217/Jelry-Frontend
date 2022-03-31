@@ -37,7 +37,10 @@ function Admin(){
             </ScrollToTop>
             
          </div>
-         
+         <div className={clsx(styles.nosupport)}>
+            <p>Your device is not compatible with this page</p>
+            <p>Please use another device to access this page.</p>
+         </div>
       </div>
       
    )
