@@ -8,6 +8,7 @@ function Sidebar() {
    const [choose, setChoose] = useState(3)
    const url = window.location.href
    const idx = {
+      'change-password': -1,
       'undefined': 0,
       'material': 1,
       'category': 2,
@@ -60,10 +61,21 @@ function Sidebar() {
          <div className={clsx(styles.adminGroup)}>
             <h3 className={clsx(styles.title)}>Admin</h3>
             <div className={clsx(styles.actionAdmin)}>
-               <div className={clsx(styles.changePass)}>
+               <Link 
+                  className={clsx(styles.changePass, styles.hover, {
+                     [styles.active]: choose === -1,
+                  })}
+                  to="/admin/change-password"
+               >
                   Đổi mật khẩu
-               </div>
-               <div className={clsx(styles.logout)}>
+               </Link>
+               <div 
+                  className={clsx(styles.logout, styles.hover)}
+                  onClick={()=>{
+                     sessionStorage.clear('token')
+                     window.location.href = '/'
+                  }}
+               >
                   <i className='bx bx-log-out'></i>
                   Đăng xuất
                </div>
@@ -77,7 +89,7 @@ function Sidebar() {
                   <li 
                      key={index} 
                      className={clsx(styles.navItem, {
-                        [styles.active]: index === choose,
+                        [styles.active]: index === choose && choose !== undefined,
                         [styles.mr12]: index === 3 || index === 4,
                      })}
                      onClick={()=> setChoose(index)}

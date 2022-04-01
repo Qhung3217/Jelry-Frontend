@@ -15,10 +15,18 @@ function App() {
     else
       setIsUrlAdmin(false)
   },[window.location.href])
-  return (
-    <div className="App">
-      {!isUrlAdmin ? <User/> : <Admin/>}
-    </div>
+  if (!isUrlAdmin)
+    return (
+      <div className="App">
+        <User/>
+      </div>
+    )
+  else
+    return (
+      <div className="App">
+        {/* {!isUrlAdmin ? <User/> : <Admin/>} */}
+        <Admin/>
+      </div>
   );
 }
 

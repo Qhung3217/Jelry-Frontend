@@ -22,25 +22,34 @@
    font-weight: 400;
    background-color: #666;
    border-radius: 4px;
-   padding-left: 20%;
+   padding: 4px 4px;
 }
 
 .changePass {
    padding: 13px 8px;
-   width: 80%;
+   width: 100%;
+   display: block;
+   margin-bottom: 4px;
 }
 
 .logout {
    padding: 13px 8px;
    display: flex;
    justify-content: center;
-   width: 80%;
+   width: 100%;
    align-items: center;
+   cursor: pointer;
 }
 .logout i{
    margin-right: 4px;
 }
 
+.hover:hover{
+   background-color: #F7F5F2;
+   color: #333;
+   border-radius: 4px;
+
+}
 
 .nav {
    padding: 0 8px;
@@ -70,7 +79,10 @@
    border-radius: 4px;
    background-color: #007bff;
 }
-
+.active.hover{
+   background-color: #F7F5F2;
+   color: #333;
+}
 .mr12 .navLink p i{
    margin-right: 12px;
 }
