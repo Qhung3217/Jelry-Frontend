@@ -1,4 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
+import {Helmet} from 'react-helmet-async'
 import clsx from 'clsx'
 import styles from '../MainPage.module.css'
 import Header from '../Header'
@@ -45,10 +46,24 @@ function SizeList(){
       setReload(!reload)
    }
    if (isLoaded)
-      return (<h1>Loading...</h1>)
+      return (
+      <>
+         <Helmet>
+               <title>
+                  Size Management
+               </title>
+         </Helmet>
+         <h1>Loading...</h1>
+      </>
+      )
    else
       return(
          <div className={clsx(styles.wrap)}>
+            <Helmet>
+               <title>
+                  Size Management
+               </title>
+            </Helmet>
             <Header title="Size"/>
             <Table
                th={th}

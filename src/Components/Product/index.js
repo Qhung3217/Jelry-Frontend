@@ -1,5 +1,6 @@
 import clsx from "clsx"
 import { useState, useEffect, useContext } from "react"
+import {Helmet} from 'react-helmet-async'
 import { Link, useParams } from "react-router-dom"
 import styles from "./Product.module.css"
 import {currencyFormat} from '../../Utils/NumberFormat'
@@ -7,12 +8,12 @@ import { GlobalVariable } from "../GlobalVariable"
 
 function Product() {
   const [products, setProducts] = useState([])
-  const { arrayNavbar, arrayProductList, productList, isLoadedProduct } = useContext(GlobalVariable)
+  const { arrayNavbar, arrayProductList, productList, isLoadedProduct, url } = useContext(GlobalVariable)
   const { slug } = useParams()
   const [material, category] = arrayNavbar()
   const productIndex = arrayProductList()
   const [showGoToTop, setShowGoToTop] = useState(false)
-
+  const prefix = url.slice(0,url.lastIndexOf('/api'))
   useEffect(() => {
     if (material[slug]) {
       //?. neu ko co return undefined
@@ -56,12 +57,22 @@ function Product() {
     if (products.length === 0)
       return (
         <div className={clsx(styles.wrap)}>
+          <Helmet>
+              <title>
+                Jelry - Products
+              </title>
+          </Helmet>
           <h1 className={clsx(styles.productTitle)}>Không có sản phẩm</h1>
         </div>
       )
     else
       return (
         <div className={clsx(styles.wrap, "grid wide")}>
+          <Helmet>
+              <title>
+                Jelry - Products
+              </title>
+          </Helmet>
           {showGoToTop&& <div className={clsx(styles.returnToTop)}>
             <Link to="#">
               <i
@@ -83,8 +94,8 @@ function Product() {
                       <Link className={clsx(styles.productThumb)} to={"/products/" + product["product_slug"]}>
                         {product.image[0] &&
                         <img
-                          src={product.image[0]['image_url']}
-                          alt=""
+                          src={prefix + '/' + product.image[0]['image_url']}
+                          alt={product['product_name']}
                         />}
                         <span className={clsx(styles.productPriceMobile)}>
                           {currencyFormat(product["product_price"])}

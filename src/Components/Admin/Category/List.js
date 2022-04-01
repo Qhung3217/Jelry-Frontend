@@ -1,4 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
+import {Helmet} from 'react-helmet-async'
 import clsx from 'clsx'
 import styles from '../MainPage.module.css'
 import Header from '../Header'
@@ -68,25 +69,39 @@ function CategoryList(){
       setReload(!reload)
    }
    if (isLoaded)
-      return (<h1>Loading...</h1>)
+      return (<>
+         <Helmet>
+               <title>
+                  Category Management
+               </title>
+         </Helmet>
+         <h1>Loading...</h1>
+      </>)
    else
       return(
-         <div className={clsx(styles.wrap)}>
-            <Header title="Category"/>
-            <Table
-               th={th}
-               items={items} 
-               title={"Category Table"} 
-               href="/admin/category/create"
-               showSearchResult={showSearchResult}
-               nameKey="category_name"
-               reloadCallback={handleReload}
-               urlAPI={url}
-               APIName="category"
-               tableEditName='category'
-            />
+         <>
+            <Helmet>
+               <title>
+                  Category Management
+               </title>
+            </Helmet>
+            <div className={clsx(styles.wrap)}>
+               <Header title="Category"/>
+               <Table
+                  th={th}
+                  items={items} 
+                  title={"Category Table"} 
+                  href="/admin/category/create"
+                  showSearchResult={showSearchResult}
+                  nameKey="category_name"
+                  reloadCallback={handleReload}
+                  urlAPI={url}
+                  APIName="category"
+                  tableEditName='category'
+               />
 
-         </div>
+            </div>
+         </>
       )
 }
 

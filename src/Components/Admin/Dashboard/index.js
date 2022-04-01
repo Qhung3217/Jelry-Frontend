@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import {useState, useEffect, useContext} from 'react'
+import {Helmet} from 'react-helmet-async'
 import styles from '../MainPage.module.css'
 import dashboard from './Dashboard.module.css'
 import Header from '../Header'
@@ -61,6 +62,11 @@ function Dashboard(){
    }
    return(
       <div className={clsx(styles.wrap)}>
+         <Helmet>
+               <title>
+                  Admin's Dashboard
+               </title>
+            </Helmet>
          <Header title="Admin's Dashboard"/>
          <div className={clsx(styles.card)}>
             

@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState, useEffect, useContext } from 'react'
+import {Helmet} from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import styles from './Cart.module.css'
 import {currencyFormat} from '../../Utils/NumberFormat'
@@ -68,6 +69,11 @@ function Cart(){
   
   return(
     <div className="grid wide">
+      <Helmet>
+          <title>
+            Jelry - Your Cart
+          </title>
+      </Helmet>
       <div className={clsx(styles.cartHeading)}>
         <h1 className={clsx(styles.title)}>Giỏ hàng của bạn</h1>
         <p className={clsx(styles.subTitle)}>Có <span>{countProd} sản phẩm</span></p>

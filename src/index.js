@@ -1,19 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
+import {HelmetProvider} from 'react-helmet-async'
 import './index.css'
 import App from './App'
 import GlobalStyle from './Components/GlobalStyle'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from './Components/GlobalVariable'
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider>
-        <GlobalStyle>
-          <App />
-        </GlobalStyle>
-      </Provider>
+      <HelmetProvider>
+        <Provider>
+          <GlobalStyle>
+            <App />
+          </GlobalStyle>
+        </Provider>
+      </HelmetProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

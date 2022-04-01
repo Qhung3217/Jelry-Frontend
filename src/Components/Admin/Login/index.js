@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import {useState, useContext} from 'react'
+import {Helmet} from 'react-helmet-async'
 import PropTypes from 'prop-types'
 import styles from './Login.module.css'
 import {GlobalVariable} from '../../GlobalVariable'
@@ -35,6 +36,11 @@ function Login({ setToken }){
    }
    return (
       <div className={clsx(styles.loginWrap)}>
+         <Helmet>
+            <title>
+               Login - Jelry
+            </title>
+         </Helmet>
          <div className={clsx(styles.content)}>
             <h1 className={clsx(styles.title)}>Please Log In</h1>
             {error && <Alert errors={error}/>}

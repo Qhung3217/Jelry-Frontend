@@ -21,7 +21,7 @@ function Sidebar() {
       let temp = url.split('/')[4]
       
       setChoose(idx[temp])
-      console.log(idx[temp],choose,temp)
+      console.log('sidebar: ',idx[temp],choose,temp)
    }, [url])
    const navs = [
       {
@@ -89,7 +89,7 @@ function Sidebar() {
                   <li 
                      key={index} 
                      className={clsx(styles.navItem, {
-                        [styles.active]: index === choose && choose !== undefined,
+                        [styles.active]: index === choose ,
                         [styles.mr12]: index === 3 || index === 4,
                      })}
                      onClick={()=> setChoose(index)}

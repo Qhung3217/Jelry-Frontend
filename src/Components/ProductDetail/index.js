@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState, useEffect, useContext } from 'react'
+import {Helmet} from 'react-helmet-async'
 import {useParams} from 'react-router-dom'
 import { GlobalVariable } from "../GlobalVariable"
 import styles from './ProductDetail.module.css'
@@ -11,10 +12,10 @@ function ProductDetail(){
   const [quantityInStock, setQuantityInStock] = useState(0)
   const [chooseSize, setChooseSize] = useState('')
   const [chooseImg, setChooseImg] = useState(0)
-  const {arrayProductList, productList, isLoadedProduct, setLocalStorageChange, localStorageChange, headerCartCheckboxRef} = useContext(GlobalVariable)
+  const {arrayProductList, productList, isLoadedProduct, setLocalStorageChange, localStorageChange, headerCartCheckboxRef, url} = useContext(GlobalVariable)
   const {slug} = useParams()
   const [isSoldOut, setIsSoldOut] = useState(true)
-
+  const prefix = url.slice(0, url.lastIndexOf('/api'))
   useEffect(() => {
     if (isLoadedProduct){
       let productIndex = arrayProductList()
@@ -37,18 +38,30 @@ function ProductDetail(){
 
   if (!isLoadedProduct || product.length === 0) {
     return(
-      <h1>Loading...</h1>
+      <>
+        <Helmet>
+            <title>
+              {`Jelry - ${product['product_name']}`}
+            </title>
+        </Helmet>
+        <h1>Loading...</h1>
+      </>
     )
   }else
     return (
       <div className="grid wide">
+        <Helmet>
+            <title>
+              {`Jelry - ${product['product_name']}`}
+            </title>
+        </Helmet>
         <div className="row">
           <div className="col l-6 m-6 s-12">
             <div className={clsx(styles.productDetailThumbGroup)}>
               <div className="row">
                 <div className="col l-12 m-12 s-12">
                   <div className={clsx(styles.productDetailMainThumb)}>
-                    <img src={product.image[chooseImg]['image_url']} alt="" />
+                    <img src={prefix + '/' + product.image[chooseImg]['image_url']} alt={product['product_name']} />
                   </div>
                 </div>
               </div>
@@ -62,7 +75,7 @@ function ProductDetail(){
                                 }
                       onClick={()=>setChooseImg(index)}
                     >
-                      <img src={image['image_url']} alt="" />
+                      <img src={prefix + '/' + image['image_url']} alt={product['product_name']} />
                     </div>
                   </div>
                 )})}

@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState, useContext } from 'react'
+import {Helmet} from 'react-helmet-async'
 import styles from './ChangePassword.module.css'
 import Alert from '../Alert'
 import {GlobalVariable} from '../../GlobalVariable'
@@ -16,7 +17,7 @@ function ChangePassword(){
    const handleChange = e => {
       setValues({...values, [e.target.name]: e.target.value})
    }
-   console.log(values)
+   // console.log(values)
    const validate = () => {
       const errors = []
       if (values.oldPass.trim() === '')
@@ -61,6 +62,11 @@ function ChangePassword(){
    }
    return (
       <div className={clsx(styles.loginWrap)}>
+         <Helmet>
+               <title>
+                  Change Password
+               </title>
+            </Helmet>
          <div className={clsx(styles.content)}>
             <h1 className={clsx(styles.title)}>Change your password</h1>
             {errors && <Alert errors={errors}/>}

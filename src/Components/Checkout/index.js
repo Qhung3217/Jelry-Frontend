@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState, useEffect, useMemo, useRef } from 'react'
+import {Helmet} from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import styles from './Checkout.module.css'
 import { currencyFormat } from '../../Utils/NumberFormat'
@@ -107,6 +108,11 @@ function Checkout() {
 
   return(
     <div className="grid wide">
+      <Helmet>
+          <title>
+            Jelry - Checkout
+          </title>
+      </Helmet>
       {message && <Alert 
         trigger={message.trigger}
         error={message.error}

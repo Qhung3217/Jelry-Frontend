@@ -21,7 +21,9 @@ function ProductCreate() {
    const [sizeList, setSizeList] = useState([])
    const [cateList, setCateList] = useState([])
    const [imgShow, setImgShow] = useState()
+   const [firstInitial, setFirstInitial] = useState(true) //fix overwrite values from ckeditor in mounted
    const {url} = useContext(GlobalVariable)
+   const prefix = url.slice(0, url.lastIndexOf('/api'))
    let {id} = useParams()
 
    useEffect(()=>{
@@ -38,6 +40,7 @@ function ProductCreate() {
          .then(response => response.json())
          .then(data => setSizeList(data.data))
    },[])
+
    useEffect(()=> {
       const urlReq = url + '/category'
       fetch(urlReq, {
@@ -47,7 +50,10 @@ function ProductCreate() {
          }
       })
          .then(response => response.json())
-         .then(data => setCateList(data.data))
+         .then(data => {
+            console.log('re-render cate')
+            setCateList(data.data)
+         })
    },[])
 
    useEffect(()=>{
@@ -72,17 +78,21 @@ function ProductCreate() {
             let arr = []
             data.image.forEach(img => arr.push(img['image_url']))
             setImgShow(arr)
-            setValues({
+            return {
                'name': data['product_name'],
                'price': data['product_price'],
                'desc': data['product_desc'],
                'cate': data['category_id'],
                'size': sz,
                'image': ''
-            })
+            }
          })
+         .then(result => setValues(result))
+         .then(()=>setFirstInitial(false))
    },[])
+
    useEffect(()=>{
+      console.log('rere')
       return()=> {
          imgShow && imgShow.forEach(img => URL.revokeObjectURL(img))
       }
@@ -220,12 +230,14 @@ function ProductCreate() {
                      data={values.desc}
                      onReady={ editor => {
                         // You can store the "editor" and use when it is needed.
-                        
+                        editor.setData(values.desc)
                      }}
                      onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        setValues({...values, 'desc': data})
-                        console.log( { event, editor, data } );
+                        if (!firstInitial){
+                           const data = editor.getData();
+                           setValues({...values, 'desc': data})
+                           console.log( { event, editor, data } )
+                        }
                      }}
                   />
                </div>
@@ -332,7 +344,7 @@ function ProductCreate() {
                         key={index} 
                         className={clsx(styles.panelItem)}
                      >
-                        <img  src={img} />
+                        <img  src={prefix + '/' + img} />
                      </div>
                   ))}
                </div>}

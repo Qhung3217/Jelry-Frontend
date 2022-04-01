@@ -1,4 +1,5 @@
 import { useEffect, useContext, useState } from 'react'
+import {Helmet} from 'react-helmet-async'
 import clsx from 'clsx'
 import styles from '../MainPage.module.css'
 import Header from '../Header'
@@ -33,11 +34,12 @@ function ProductList(){
    },[reload])
    useEffect(()=> {
       console.log(items)
+      const prefix = url.slice(0,url.lastIndexOf('/api'))
       let obj = {}
       items && items.forEach(item => {
          if (item.image.length > 0){
             let temp =[]
-            item.image.forEach(img => temp.push('http://jelry.test/'+img['image_url']))
+            item.image.forEach(img => temp.push(prefix+'/'+img['image_url']))
             obj = {
                ...obj,
                [item['product_id']]: temp
@@ -78,10 +80,24 @@ function ProductList(){
       setReload(!reload)
    }
    if (isLoaded)
-      return (<h1>Loading...</h1>)
+      return (
+         <>
+            <Helmet>
+               <title>
+                  Product Management
+               </title>
+            </Helmet>
+            <h1>Loading...</h1>
+         </>
+      )
    else
       return(
          <div className={clsx(styles.wrap)}>
+            <Helmet>
+               <title>
+                  Product Management
+               </title>
+            </Helmet>
             <Header title="Product"/>
             <Table
                th={th}
