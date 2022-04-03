@@ -1,0 +1,36 @@
+.content {
+   margin: 50px 0;
+}
+.content h1 {
+   font-size: 40px;
+   font-weight: 500;
+   margin-bottom: 13px;
+}
+
+.content p{
+   font-weight: 400;
+   opacity: 0.66;
+   font-size: 14px;
+   line-height: 21px;
+   margin-bottom: 10px;
+}
+
+.content a{
+   display: block;
+   margin-top: 30px;
+   font-size: 16px;
+   font-weight: 500;
+}
+
+.content a:hover{
+   color: var(--hover-color);
+}
+
+.content:after {
+   content: "";
+   display: block;
+   background: #252a2b;
+   width: 80px;
+   height: 4px;
+   margin: 50px auto 0;
+}

@@ -8,6 +8,7 @@ import Product from '../Product'
 import ProductDetail from '../ProductDetail'
 import Cart from '../Cart'
 import Checkout from '../Checkout'
+import PageNotFound from '../PageNotFound'
 
 function User(){
    return(
@@ -24,6 +25,7 @@ function User(){
             <Route path="/pages/chinh-sach-bao-mat-thong-tin" element={<InforPrivatePolicy/>}></Route>
             <Route path="/pages/chinh-sach-bao-hanh" element={<WarrantyPolicy/>}></Route>
             <Route path="/pages/thanh-toan-va-giao-hang" element={<DeliveryAndCheckout/>}></Route>
+            <Route path="*" element={<PageNotFound/>}></Route>
          </Routes>
       </ScrollToTop>
    <Footer/>
