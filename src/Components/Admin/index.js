@@ -12,6 +12,7 @@ import {InvoiceList} from './Invoice'
 import Dashboard from './Dashboard'
 import Login from './Login'
 import ChangePassword from './ChangePassword'
+import PageNotFound from './PageNotFound'
 
 function Admin(){
    const {token, setToken} = useToken()
@@ -41,6 +42,7 @@ function Admin(){
                   <Route path="/admin/size/create" element={<SizeCreate/>}></Route>
                   <Route path="/admin/size/edit/:id" element={<SizeEdit/>}></Route>
                   <Route path="/admin/invoice" element={<InvoiceList/>}></Route>
+                  <Route path="*" element={<PageNotFound/>}></Route>
 
                </Routes>
             </ScrollToTop>
