@@ -9,7 +9,8 @@ import { GlobalVariable } from '../GlobalVariable'
 function Cart(){
   const [carts, setCarts] = useState([])
   const [isLoadedCart, setIsLoadedCart] = useState(false)
-  const {quantityList, setLocalStorageChange, localStorageChange} = useContext(GlobalVariable)
+  const {quantityList, setLocalStorageChange, localStorageChange, url} = useContext(GlobalVariable)
+  const prefix = url.slice(0,url.lastIndexOf('/api'))
   let total = 0
   if (carts.length > 0){
     total = carts.reduce((result,cart) => result += cart.product['product_price']*cart.quantity,0)
@@ -87,7 +88,7 @@ function Cart(){
               carts.map((cart,index) => (
                 <div key={index} className={clsx(styles.cartItem)}>
                   <div className={clsx(styles.cartImage)}>
-                    {cart.product.image.length > 0 && <img src={cart.product.image[0]['image_url']} alt={cart.product['product_name']} />}
+                    {cart.product.image.length > 0 && <img src={prefix + '/' + cart.product.image[0]['image_url']} alt={cart.product['product_name']} />}
                   </div>
                   <div className={clsx(styles.cartInfo)}>
                     <div className={clsx(styles.cartTitleAndAction)}>

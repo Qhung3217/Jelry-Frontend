@@ -67,7 +67,7 @@ function Sidebar() {
                   })}
                   to="/admin/change-password"
                >
-                  Đổi mật khẩu
+                  Change Password
                </Link>
                <div 
                   className={clsx(styles.logout, styles.hover)}
@@ -77,7 +77,7 @@ function Sidebar() {
                   }}
                >
                   <i className='bx bx-log-out'></i>
-                  Đăng xuất
+                  Logout
                </div>
             </div>
          </div>

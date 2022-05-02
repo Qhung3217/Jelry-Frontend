@@ -1,10 +1,11 @@
 import clsx from 'clsx'
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo, useRef, useContext } from 'react'
 import {Helmet} from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import styles from './Checkout.module.css'
 import { currencyFormat } from '../../Utils/NumberFormat'
 import {validateEmail, validatePhone} from '../../Utils/Regex'
+import { GlobalVariable } from '../GlobalVariable'
 import Alert from '../Alert'
 
 function Checkout() {
@@ -20,6 +21,8 @@ function Checkout() {
   const [isWardEmpty, setIsWardEmpty] = useState(false)
   const [message, setMessage] = useState()
   const inputName = useRef(null)
+  const {url} = useContext(GlobalVariable)
+  const prefix = url.slice(0,url.lastIndexOf('/api'))
 
   const [userInfo, setUserInfo] = useState({
     'customer_name': '',
@@ -143,7 +146,7 @@ function Checkout() {
               {carts.map( (cart,index) => (
                 <div key={index} className={clsx(styles.cartItem)}>
                   <div className={clsx(styles.cartImg)}>
-                    <img src={cart.product.image[0]['image_url']} alt={cart.product['product_name']} />
+                    <img src={prefix + '/' + cart.product.image[0]['image_url']} alt={cart.product['product_name']} />
                     <span className={clsx(styles.cartQuantity)}>{cart.quantity}</span>
                   </div>
                   <div className={clsx(styles.cartInfo)}>

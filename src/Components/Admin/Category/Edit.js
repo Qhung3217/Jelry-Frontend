@@ -96,7 +96,10 @@ function CategoryEdit() {
                window.location.replace(url)
             }
             else
-               alert(data.errors.name)
+               if (data?.errors)
+                  alert(data.errors.name)
+               else
+                  alert(data.message)
          })
          .catch(err => alert(err.message))
    }

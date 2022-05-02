@@ -8,7 +8,8 @@ import {GlobalVariable} from '../GlobalVariable'
 function HeaderActionCart(){
   const [carts, setCarts] = useState([])
   // const checkbox = useRef(null)
-  const {localStorageChange, headerCartCheckboxRef} = useContext(GlobalVariable)
+  const {localStorageChange, headerCartCheckboxRef, url} = useContext(GlobalVariable)
+  const prefix = url.slice(0,url.lastIndexOf('/api'))
   console.log('before: ',carts)
   useEffect(()=>{
     let cart = localStorage.getItem('cart')
@@ -95,7 +96,7 @@ function HeaderActionCart(){
                     to={'/products/'+cart.product['product_slug']}
                     onClick={handleClickItem}
                   >
-                    <img src={cart.product.image[0]['image_url']} alt="" />
+                    <img src={prefix + '/' + cart.product.image[0]['image_url']} alt="" />
                   </Link>
                 </div>
                 <div className={clsx(styles.cartInfo)}>
