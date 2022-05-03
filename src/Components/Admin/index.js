@@ -43,7 +43,6 @@ function Admin(){
                   <Route path="/admin/size/edit/:id" element={<SizeEdit/>}></Route>
                   <Route path="/admin/invoice" element={<InvoiceList/>}></Route>
                   <Route path="*" element={<PageNotFound/>}></Route>
-
                </Routes>
             </ScrollToTop>
             

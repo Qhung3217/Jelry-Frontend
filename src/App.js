@@ -7,9 +7,7 @@ function App() {
   const [isUrlAdmin, setIsUrlAdmin] = useState(false)
   useEffect(()=>{
     const url = (new URL(window.location.href))
-    // console.log('url: ', url)
     const prefix = url.pathname.slice(0,6)
-    // console.log('app prefix: ',prefix)
     if (prefix === '/admin')
       setIsUrlAdmin(true)
     else
@@ -24,7 +22,6 @@ function App() {
   else
     return (
       <div className="App">
-        {/* {!isUrlAdmin ? <User/> : <Admin/>} */}
         <Admin/>
       </div>
   );

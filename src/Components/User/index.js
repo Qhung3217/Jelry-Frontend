@@ -30,7 +30,7 @@ function User(){
       </ScrollToTop>
    <Footer/>
    </>
-)
+   )
 }
 
 export default User

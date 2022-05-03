@@ -39,6 +39,7 @@ function ChangePassword(){
       }
       const payload = {
          'newPass': values.newPass,
+         'oldPass': values.oldPass,
       }
       const urlReq = url + '/change-password'
       fetch(urlReq, {
@@ -73,7 +74,7 @@ function ChangePassword(){
             <div className={clsx(styles.formGroup)}>
                <label htmlFor="oldPass">Current Password</label>
                <input
-                  type="text"
+                  type="password"
                   id="oldPass"
                   placeholder="Current password"
                   name="oldPass"
@@ -83,7 +84,7 @@ function ChangePassword(){
             <div className={clsx(styles.formGroup)}>
                <label htmlFor="password">New Password</label>
                <input
-                  type="text"
+                  type="password"
                   id="password"
                   placeholder="New password"
                   name="newPass"
@@ -93,7 +94,7 @@ function ChangePassword(){
             <div className={clsx(styles.formGroup)}>
                <label htmlFor="retypePassword">Confirm new Password</label>
                <input
-                  type="text"
+                  type="password"
                   id="retypePassword"
                   placeholder="Confirm new password"
                   name="confirmPass"
