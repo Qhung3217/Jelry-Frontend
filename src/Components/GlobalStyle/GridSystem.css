@@ -15,7 +15,6 @@
   margin: 0 auto;
 }
 
-/* Code danh cho mobile (khong can phai canh 2 le tren mobile) */
 .row {
   display: flex;
   flex-wrap: wrap;

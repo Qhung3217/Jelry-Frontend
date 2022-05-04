@@ -66,6 +66,7 @@ function Sidebar() {
                      [styles.active]: choose === -1,
                   })}
                   to="/admin/change-password"
+                  onClick={()=>setChoose(-1)}
                >
                   Change Password
                </Link>

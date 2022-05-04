@@ -15,7 +15,7 @@ function App() {
   },[window.location.href])
   if (!isUrlAdmin)
     return (
-      <div className="App">
+      <div>
         <User/>
       </div>
     )

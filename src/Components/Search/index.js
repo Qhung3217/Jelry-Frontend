@@ -9,9 +9,9 @@ import styles from './Search.module.css'
 function Search({ mobile = false}){
   const [searchKey, setSearchKey] = useState('')
   const [searchResult, setSearchResult] = useState([])
-  const {productList} = useContext(GlobalVariable)
+  const {productList, url} = useContext(GlobalVariable)
   const activeSearch = useRef(null)
-  
+  const prefix = url.slice(0, url.lastIndexOf('/api'))
   useEffect(()=> {
     const result = productList.filter(prod=>{
       let name = prod['product_name'].toLocaleLowerCase()
@@ -47,11 +47,19 @@ function Search({ mobile = false}){
         ref={activeSearch}
         />
       <label className={clsx(styles.modal, styles.onlyDisplayInDesktop)} htmlFor="searchCheckbox"></label>
+      <div 
+        className={clsx(styles.modalMobile, {
+          [styles.displayNone]: searchKey === ''
+        })}
+        onClick={e => setSearchKey('')}
+      ></div>
       <div className={clsx(styles.searchDropdown)}>
         
         <h3 className={clsx(styles.searchTitle)}>Tìm kiếm</h3>
         <p className={clsx(styles.searchNotice)}>Vui lòng nhập chữ có dấu!</p>
-        <div className={clsx(styles.searchInput)}>
+        <div 
+          className={clsx(styles.searchInput)}
+        >
           <input 
             type="text"
             value={searchKey}
@@ -90,7 +98,7 @@ function Search({ mobile = false}){
                       to={"/products/" + srch["product_slug"]}
                       onClick={handleClickLink}
                     >
-                      <img src={srch.image[0]['image_url']} alt={srch['product_name']} />
+                      <img src={prefix + '/' + srch.image[0]['image_url']} alt={srch['product_name']} />
                     </Link>
                   </div>}
                 </div>
