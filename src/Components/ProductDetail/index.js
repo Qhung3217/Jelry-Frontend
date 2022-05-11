@@ -30,6 +30,10 @@ function ProductDetail(){
           setChooseSize(temp.size[index]['size_name'])
           setQuantityInStock(temp.size[index].pivot['product_size_quantily'])
         }
+        else{
+          setChooseSize(temp.size[0]['size_name'])
+          setQuantityInStock(temp.size[0].pivot['product_size_quantily'])
+        }
       }
       setProduct(temp)
     }

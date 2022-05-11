@@ -19,7 +19,7 @@
   max-width: 400px;
   border-radius: 4px;
   transition: all 0.2s linear;
-
+  text-align: center;
 }
 
 .icon {

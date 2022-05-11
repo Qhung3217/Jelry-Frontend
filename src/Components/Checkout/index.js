@@ -110,7 +110,7 @@ function Checkout() {
   }
 
   return(
-    <div className="grid wide">
+    <div className={clsx(styles.textAlign, "grid wide")}>
       <Helmet>
           <title>
             Jelry - Checkout
