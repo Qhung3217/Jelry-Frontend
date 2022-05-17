@@ -65,7 +65,7 @@ header{
 }
 
 .cartAction:hover .cartCount{
-  transform: translateY(150%);
+  transform: translate(-50%,150%);
 }
 .cartAction:hover .cartCountWrap::after{
   transform: translate(-50%,0);
